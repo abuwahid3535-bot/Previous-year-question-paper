@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mother Theresa Degree College - Staff Sign In</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- College Name -->
+        <marquee behavior="scroll"
+                 direction="left"
+                 scrollamount="10">
+
+            MOTHER THERESA DEGREE COLLEGE
+
+        </marquee>
+
+
+        <!-- Staff Sign In -->
+        <div class="subtitle">
+            Staff Sign In
+        </div>
+
+
+        <!-- Sign In Box -->
+        <div class="login-box">
+
+            <form id="staffLoginForm">
+
+                <!-- Staff Email -->
+                <div class="form-group">
+
+                    <label for="staffEmail">
+                        Staff Email ID
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="staffEmail"
+                            placeholder="staff@example.com"
+                        >
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                    </div>
+
+                    <small id="staff-email-error">
+                        Please enter your staff email ID
+                    </small>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="staffPassword">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="staffPassword"
+                            placeholder="Password"
+                        >
+
+                        <i class="fa-solid fa-eye-slash"
+                           id="toggleStaffPassword"></i>
+
+                    </div>
+
+                    <small id="staff-password-error">
+                        Please enter your password
+                    </small>
+
+                </div>
+
+
+                <!-- Bottom Section -->
+                <div class="bottom-section">
+
+                    <div class="buttons">
+
+                        <!-- Sign In -->
+                        <button
+                            type="submit"
+                            class="login-btn">
+
+                            Sign In
+
+                        </button>
+
+
+                        <!-- Sign Up -->
+                        <button
+                            type="button"
+                            class="register-btn"
+                            onclick="window.location.href='staffregister.html'">
+
+                            Sign Up
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="links">
+
+                        <a href="#">
+                            Forgot Password?
+                        </a>
+
+                        <a href="#">
+                            Help
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        // Get elements
+        const staffLoginForm =
+            document.getElementById("staffLoginForm");
+
+        const staffEmail =
+            document.getElementById("staffEmail");
+
+        const staffPassword =
+            document.getElementById("staffPassword");
+
+        const staffEmailError =
+            document.getElementById("staff-email-error");
+
+        const staffPasswordError =
+            document.getElementById("staff-password-error");
+
+
+        // Staff Email Validation
+        staffEmail.addEventListener("input", function () {
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (staffEmail.value === "") {
+
+                staffEmailError.textContent =
+                    "Please enter your staff email ID";
+
+                staffEmailError.style.color =
+                    "#d8e5ff";
+
+            }
+
+            else if (!emailPattern.test(staffEmail.value)) {
+
+                staffEmailError.textContent =
+                    "Please enter a valid staff email ID";
+
+                staffEmailError.style.color =
+                    "red";
+
+            }
+
+            else {
+
+                staffEmailError.textContent =
+                    "Valid staff email ID ✓";
+
+                staffEmailError.style.color =
+                    "lightgreen";
+
+            }
+
+        });
+
+
+        // Staff Password Validation
+        staffPassword.addEventListener("input", function () {
+
+            if (staffPassword.value === "") {
+
+                staffPasswordError.textContent =
+                    "Please enter your password";
+
+                staffPasswordError.style.color =
+                    "#d8e5ff";
+
+            }
+
+            else if (staffPassword.value.length < 6) {
+
+                staffPasswordError.textContent =
+                    "Password must contain at least 6 characters";
+
+                staffPasswordError.style.color =
+                    "red";
+
+            }
+
+            else {
+
+                staffPasswordError.textContent =
+                    "Valid password ✓";
+
+                staffPasswordError.style.color =
+                    "lightgreen";
+
+            }
+
+        });
+
+
+        // Staff Sign In Validation
+        staffLoginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                let valid = true;
+
+
+                // Check Staff Email
+                if (!emailPattern.test(staffEmail.value)) {
+
+                    staffEmailError.textContent =
+                        "Please enter a valid staff email ID";
+
+                    staffEmailError.style.color =
+                        "red";
+
+                    valid = false;
+
+                }
+
+
+                // Check Password
+                if (staffPassword.value.length < 6) {
+
+                    staffPasswordError.textContent =
+                        "Password must contain at least 6 characters";
+
+                    staffPasswordError.style.color =
+                        "red";
+
+                    valid = false;
+
+                }
+
+
+                // If everything is valid
+                if (valid) {
+
+                    alert("Staff Sign In successful!");
+
+                }
+
+            }
+        );
+
+
+        // Show / Hide Staff Password
+        const toggleStaffPassword =
+            document.getElementById("toggleStaffPassword");
+
+
+        toggleStaffPassword.addEventListener(
+            "click",
+            function () {
+
+                if (staffPassword.type === "password") {
+
+                    staffPassword.type = "text";
+
+                    toggleStaffPassword.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+                    toggleStaffPassword.classList.add(
+                        "fa-eye"
+                    );
+
+                }
+
+                else {
+
+                    staffPassword.type = "password";
+
+                    toggleStaffPassword.classList.remove(
+                        "fa-eye"
+                    );
+
+                    toggleStaffPassword.classList.add(
+                        "fa-eye-slash"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

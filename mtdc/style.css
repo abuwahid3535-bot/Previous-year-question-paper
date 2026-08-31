@@ -1,0 +1,376 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Body */
+
+body {
+
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+
+    background-image:
+
+        linear-gradient(
+            rgba(0, 0, 0, 0.50),
+            rgba(0, 0, 0, 0.50)
+        ),
+
+        url("degree.PNG");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+}
+
+
+/* Main Container */
+
+.container {
+
+    width: 100%;
+
+    text-align: center;
+
+    padding-top: 15px;
+
+}
+
+
+/* College Name */
+
+marquee {
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    padding: 10px 0;
+
+}
+
+
+/* Student Login */
+
+.subtitle {
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    margin-bottom: 60px;
+
+}
+
+
+/* Login Box */
+
+.login-box {
+
+    width: 560px;
+
+    margin: 0 auto;
+
+    background: rgba(27, 25, 35, 0.90);
+
+    border: 1px solid #111827;
+
+    border-radius: 8px;
+
+    padding: 30px 24px 0;
+
+    text-align: left;
+
+}
+
+
+/* Form Group */
+
+.form-group {
+
+    margin-bottom: 18px;
+
+}
+
+
+/* Labels */
+
+label {
+
+    display: block;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* Input Box */
+
+.input-box {
+
+    position: relative;
+
+    width: 100%;
+
+}
+
+
+/* Input */
+
+.input-box input {
+
+    width: 100%;
+
+    height: 43px;
+
+    background: #202b3b;
+
+    border: 1px solid #39475a;
+
+    border-radius: 4px;
+
+    color: white;
+
+    font-size: 15px;
+
+    padding: 0 42px 0 10px;
+
+    outline: none;
+
+}
+
+
+/* Placeholder */
+
+.input-box input::placeholder {
+
+    color: #9aa8bb;
+
+}
+
+
+/* Focus */
+
+.input-box input:focus {
+
+    border-color: #3b82f6;
+
+}
+
+
+/* Icons */
+
+.input-box i {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #eeeeee;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+}
+
+
+/* Message */
+
+small {
+
+    display: block;
+
+    color: #d8e5ff;
+
+    font-size: 12px;
+
+    margin-top: 7px;
+
+}
+
+
+/* Bottom Section */
+
+.bottom-section {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 22px -24px 0;
+
+    padding: 27px 24px;
+
+    border-top: 1px solid #3d3b48;
+
+}
+
+
+/* Buttons */
+
+.buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+
+/* Common Button */
+
+button {
+
+    border: none;
+
+    border-radius: 4px;
+
+    padding: 12px 18px;
+
+    font-size: 14px;
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+/* Login Button */
+
+.login-btn {
+
+    background: #2563eb;
+
+}
+
+
+.login-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* Register Button */
+
+.register-btn {
+
+    background: #dc2626;
+
+}
+
+
+.register-btn:hover {
+
+    background: #b91c1c;
+
+}
+
+
+/* Links */
+
+.links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.links a {
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+}
+
+
+.links a:hover {
+
+    color: #60a5fa;
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    marquee {
+
+        font-size: 28px;
+
+    }
+
+
+    .subtitle {
+
+        font-size: 28px;
+
+        margin-bottom: 40px;
+
+    }
+
+
+    .login-box {
+
+        width: 90%;
+
+    }
+
+
+    .bottom-section {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 20px;
+
+    }
+
+
+    .links {
+
+        align-items: flex-end;
+
+    }
+
+}

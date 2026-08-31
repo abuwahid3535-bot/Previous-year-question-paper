@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mother Theresa Degree College - Student Sign In</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- College Name -->
+        <marquee behavior="scroll"
+                 direction="left"
+                 scrollamount="10">
+
+            MOTHER THERESA DEGREE COLLEGE
+
+        </marquee>
+
+
+        <!-- Student Sign In -->
+        <div class="subtitle">
+            Student Sign In
+        </div>
+
+
+        <!-- Sign In Box -->
+        <div class="login-box">
+
+            <form id="loginForm">
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email ID
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="email"
+                            placeholder="user@example.com"
+                        >
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <small id="email-error">
+                        Please enter your email ID
+                    </small>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                        >
+
+                        <i class="fa-solid fa-eye-slash"
+                           id="togglePassword"></i>
+
+                    </div>
+
+                    <small id="password-error">
+                        Please enter your password
+                    </small>
+
+                </div>
+
+
+                <!-- Bottom Section -->
+                <div class="bottom-section">
+
+                    <div class="buttons">
+
+                        <!-- Sign In Button -->
+                        <button
+                            type="submit"
+                            class="login-btn">
+
+                            Sign In
+
+                        </button>
+
+
+                        <!-- Sign Up Button -->
+                        <button
+                            type="button"
+                            class="register-btn"
+                            onclick="window.location.href='register.html'">
+
+                            Sign Up
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="links">
+
+                        <a href="#">
+                            Forgot Password?
+                        </a>
+
+                        <a href="#">
+                            Help
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        // Get elements
+        const loginForm = document.getElementById("loginForm");
+
+        const email = document.getElementById("email");
+
+        const password = document.getElementById("password");
+
+        const emailError = document.getElementById("email-error");
+
+        const passwordError =
+            document.getElementById("password-error");
+
+
+        // Email validation
+        email.addEventListener("input", function () {
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (email.value === "") {
+
+                emailError.textContent =
+                    "Please enter your email ID";
+
+                emailError.style.color = "#d8e5ff";
+
+            }
+
+            else if (!emailPattern.test(email.value)) {
+
+                emailError.textContent =
+                    "Please enter a valid email ID";
+
+                emailError.style.color = "red";
+
+            }
+
+            else {
+
+                emailError.textContent =
+                    "Valid email ID ✓";
+
+                emailError.style.color = "lightgreen";
+
+            }
+
+        });
+
+
+        // Password validation
+        password.addEventListener("input", function () {
+
+            if (password.value === "") {
+
+                passwordError.textContent =
+                    "Please enter your password";
+
+                passwordError.style.color = "#d8e5ff";
+
+            }
+
+            else if (password.value.length < 6) {
+
+                passwordError.textContent =
+                    "Password must contain at least 6 characters";
+
+                passwordError.style.color = "red";
+
+            }
+
+            else {
+
+                passwordError.textContent =
+                    "Valid password ✓";
+
+                passwordError.style.color = "lightgreen";
+
+            }
+
+        });
+
+
+        // Sign In validation
+        loginForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            let valid = true;
+
+
+            // Check email
+            if (!emailPattern.test(email.value)) {
+
+                emailError.textContent =
+                    "Please enter a valid email ID";
+
+                emailError.style.color = "red";
+
+                valid = false;
+
+            }
+
+
+            // Check password
+            if (password.value.length < 6) {
+
+                passwordError.textContent =
+                    "Password must contain at least 6 characters";
+
+                passwordError.style.color = "red";
+
+                valid = false;
+
+            }
+
+
+            if (valid) {
+
+                alert("Sign In successful!");
+
+            }
+
+        });
+
+
+        // Show / hide password
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        togglePassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                togglePassword.classList.remove(
+                    "fa-eye-slash"
+                );
+
+                togglePassword.classList.add(
+                    "fa-eye"
+                );
+
+            }
+
+            else {
+
+                password.type = "password";
+
+                togglePassword.classList.remove(
+                    "fa-eye"
+                );
+
+                togglePassword.classList.add(
+                    "fa-eye-slash"
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

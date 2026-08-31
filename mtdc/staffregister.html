@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Registration - Mother Theresa Degree College</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #111111;
+            min-height: 100vh;
+            color: white;
+            padding: 30px 15px;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 900px;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+
+        /* ================= COLLEGE NAME ================= */
+
+        marquee {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* ================= TITLE ================= */
+
+        .subtitle {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* ================= FORM BOX ================= */
+
+        .register-box {
+            background: #2d2d2d;
+            padding: 28px;
+            border-radius: 14px;
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ================= TWO COLUMN FORM ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 27px;
+            row-gap: 22px;
+        }
+
+        /* ================= FORM GROUP ================= */
+
+        .form-group {
+            width: 100%;
+        }
+
+        /* ================= LABEL ================= */
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: white;
+        }
+
+        /* ================= INPUT BOX ================= */
+
+        .input-box {
+            position: relative;
+        }
+
+        /* ================= INPUT AND SELECT ================= */
+
+        input,
+        select {
+            width: 100%;
+            height: 37px;
+
+            padding: 8px 38px 8px 11px;
+
+            border: none;
+            border-radius: 5px;
+
+            background: white;
+            color: #111111;
+
+            outline: none;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #777777;
+        }
+
+        input:focus,
+        select:focus {
+            box-shadow:
+                0 0 5px rgba(38, 120, 201, 0.7);
+        }
+
+        /* ================= ICON ================= */
+
+        .input-box i {
+            position: absolute;
+
+            right: 11px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #2678c9;
+
+            cursor: pointer;
+        }
+
+        /* ================= ERROR ================= */
+
+        small {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+        }
+
+        /* ================= BUTTON SECTION ================= */
+
+        .bottom-section {
+            grid-column: 1 / 3;
+            margin-top: 3px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        button {
+            flex: 1;
+
+            height: 40px;
+
+            border: none;
+            border-radius: 5px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        /* ================= REGISTER ================= */
+
+        .register-btn {
+            background: #2678c9;
+            color: white;
+        }
+
+        .register-btn:hover {
+            background: #1b65ad;
+        }
+
+        /* ================= LOGIN ================= */
+
+        .login-btn {
+            background: #555555;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: #666666;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom-section {
+                grid-column: 1;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            marquee {
+                font-size: 21px;
+            }
+
+            .subtitle {
+                font-size: 21px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ==================================================
+         COLLEGE NAME
+    ================================================== -->
+
+    <marquee
+        behavior="scroll"
+        direction="left"
+        scrollamount="10">
+
+        MOTHER THERESA DEGREE COLLEGE
+
+    </marquee>
+
+
+    <!-- ==================================================
+         PAGE TITLE
+    ================================================== -->
+
+    <div class="subtitle">
+
+        Staff Registration
+
+    </div>
+
+
+    <!-- ==================================================
+         REGISTRATION FORM
+    ================================================== -->
+
+    <div class="register-box">
+
+        <form id="registerForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- ================= FULL NAME ================= -->
+
+                <div class="form-group">
+
+                    <label for="fullname">
+                        Full Name
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="fullname"
+                            placeholder="Enter your full name"
+                            required>
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= STAFF ID ================= -->
+
+                <div class="form-group">
+
+                    <label for="staffId">
+                        Staff ID
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="staffId"
+                            placeholder="Enter staff ID"
+                            required>
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= EMAIL ================= -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Official Email ID
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="staff@example.com"
+                            required>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                    </div>
+
+                    <small id="email-error"></small>
+
+                </div>
+
+
+                <!-- ================= MOBILE ================= -->
+
+                <div class="form-group">
+
+                    <label for="mobile">
+                        Mobile Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            maxlength="10"
+                            placeholder="Enter 10 digit mobile number"
+                            required>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                    </div>
+
+                    <small id="mobile-error"></small>
+
+                </div>
+
+
+                <!-- ================= DEPARTMENT ================= -->
+
+                <div class="form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select id="department" required>
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="Computer Science">
+                            Computer Science
+                        </option>
+
+                        <option value="Data Science">
+                            Data Science
+                        </option>
+
+                        <option value="Commerce">
+                            Commerce
+                        </option>
+
+                        <option value="Management">
+                            Management
+                        </option>
+
+                        <option value="Mathematics">
+                            Mathematics
+                        </option>
+
+                        <option value="English">
+                            English
+                        </option>
+
+                        <option value="Administration">
+                            Administration
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ================= DESIGNATION ================= -->
+
+                <div class="form-group">
+
+                    <label for="designation">
+                        Designation
+                    </label>
+
+                    <select id="designation" required>
+
+                        <option value="">
+                            Select Designation
+                        </option>
+
+                        <option value="Principal">
+                            Principal
+                        </option>
+
+                        <option value="HOD">
+                            HOD
+                        </option>
+
+                        <option value="Lecturer">
+                            Lecturer
+                        </option>
+
+                        <option value="CRT Staff">
+                            CRT Staff
+                        </option>
+
+                        <option value="Lab Assistant">
+                            Lab Assistant
+                        </option>
+
+                        <option value="Office Staff">
+                            Office Staff
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ================= QUALIFICATION ================= -->
+
+                <div class="form-group">
+
+                    <label for="qualification">
+                        Qualification
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="qualification"
+                            placeholder="Example: MCA, MBA, M.Com"
+                            required>
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= PASSWORD ================= -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create password"
+                            required>
+
+                        <i
+                            class="fa-solid fa-eye-slash"
+                            id="togglePassword">
+                        </i>
+
+                    </div>
+
+                    <small id="password-error"></small>
+
+                </div>
+
+
+                <!-- ================= CONFIRM PASSWORD ================= -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            required>
+
+                        <i
+                            class="fa-solid fa-eye-slash"
+                            id="toggleConfirmPassword">
+                        </i>
+
+                    </div>
+
+                    <small id="confirm-error"></small>
+
+                </div>
+
+
+                <!-- ================= BUTTONS ================= -->
+
+                <div class="bottom-section">
+
+                    <div class="buttons">
+
+                        <button
+                            type="submit"
+                            class="register-btn">
+
+                            Register
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="login-btn"
+                            onclick="window.location.href='stafflogin.html'">
+
+                            Back to Login
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       GET ELEMENTS
+    ===================================================== */
+
+    const form =
+        document.getElementById("registerForm");
+
+    const email =
+        document.getElementById("email");
+
+    const mobile =
+        document.getElementById("mobile");
+
+    const password =
+        document.getElementById("password");
+
+    const confirmPassword =
+        document.getElementById("confirmPassword");
+
+
+    /* =====================================================
+       EMAIL VALIDATION
+    ===================================================== */
+
+    email.addEventListener("input", function () {
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const error =
+            document.getElementById("email-error");
+
+
+        if (email.value === "") {
+
+            error.textContent =
+                "Please enter your email";
+
+            error.style.color = "red";
+
+        }
+
+        else if (!emailPattern.test(email.value)) {
+
+            error.textContent =
+                "Please enter a valid email ID";
+
+            error.style.color = "red";
+
+        }
+
+        else {
+
+            error.textContent =
+                "Valid email ✓";
+
+            error.style.color = "lightgreen";
+
+        }
+
+    });
+
+
+    /* =====================================================
+       MOBILE VALIDATION
+    ===================================================== */
+
+    mobile.addEventListener("input", function () {
+
+        const mobilePattern =
+            /^[0-9]{10}$/;
+
+        const error =
+            document.getElementById("mobile-error");
+
+
+        if (!mobilePattern.test(mobile.value)) {
+
+            error.textContent =
+                "Enter a valid 10 digit mobile number";
+
+            error.style.color = "red";
+
+        }
+
+        else {
+
+            error.textContent =
+                "Valid mobile number ✓";
+
+            error.style.color = "lightgreen";
+
+        }
+
+    });
+
+
+    /* =====================================================
+       PASSWORD VALIDATION
+    ===================================================== */
+
+    password.addEventListener("input", function () {
+
+        const error =
+            document.getElementById("password-error");
+
+
+        if (password.value.length < 6) {
+
+            error.textContent =
+                "Password must contain at least 6 characters";
+
+            error.style.color = "red";
+
+        }
+
+        else {
+
+            error.textContent =
+                "Strong password ✓";
+
+            error.style.color = "lightgreen";
+
+        }
+
+    });
+
+
+    /* =====================================================
+       CONFIRM PASSWORD
+    ===================================================== */
+
+    confirmPassword.addEventListener(
+        "input",
+        function () {
+
+            const error =
+                document.getElementById("confirm-error");
+
+
+            if (
+                confirmPassword.value !==
+                password.value
+            ) {
+
+                error.textContent =
+                    "Passwords do not match";
+
+                error.style.color = "red";
+
+            }
+
+            else {
+
+                error.textContent =
+                    "Passwords match ✓";
+
+                error.style.color = "lightgreen";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       FORM SUBMISSION
+    ===================================================== */
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            const mobilePattern =
+                /^[0-9]{10}$/;
+
+
+            /* EMAIL */
+
+            if (!emailPattern.test(email.value)) {
+
+                alert(
+                    "Please enter a valid email ID"
+                );
+
+                return;
+
+            }
+
+
+            /* MOBILE */
+
+            if (!mobilePattern.test(mobile.value)) {
+
+                alert(
+                    "Please enter a valid mobile number"
+                );
+
+                return;
+
+            }
+
+
+            /* PASSWORD */
+
+            if (password.value.length < 6) {
+
+                alert(
+                    "Password must contain at least 6 characters"
+                );
+
+                return;
+
+            }
+
+
+            /* CONFIRM PASSWORD */
+
+            if (
+                password.value !==
+                confirmPassword.value
+            ) {
+
+                alert(
+                    "Passwords do not match"
+                );
+
+                return;
+
+            }
+
+
+            /* SUCCESS */
+
+            alert(
+                "Staff registration successful!"
+            );
+
+
+            form.reset();
+
+        }
+    );
+
+
+    /* =====================================================
+       SHOW / HIDE PASSWORD
+    ===================================================== */
+
+    document
+        .getElementById("togglePassword")
+        .addEventListener(
+            "click",
+            function () {
+
+                if (password.type === "password") {
+
+                    password.type = "text";
+
+                    this.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+                    this.classList.add(
+                        "fa-eye"
+                    );
+
+                }
+
+                else {
+
+                    password.type = "password";
+
+                    this.classList.remove(
+                        "fa-eye"
+                    );
+
+                    this.classList.add(
+                        "fa-eye-slash"
+                    );
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       SHOW / HIDE CONFIRM PASSWORD
+    ===================================================== */
+
+    document
+        .getElementById("toggleConfirmPassword")
+        .addEventListener(
+            "click",
+            function () {
+
+                if (
+                    confirmPassword.type ===
+                    "password"
+                ) {
+
+                    confirmPassword.type = "text";
+
+                    this.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+                    this.classList.add(
+                        "fa-eye"
+                    );
+
+                }
+
+                else {
+
+                    confirmPassword.type =
+                        "password";
+
+                    this.classList.remove(
+                        "fa-eye"
+                    );
+
+                    this.classList.add(
+                        "fa-eye-slash"
+                    );
+
+                }
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>

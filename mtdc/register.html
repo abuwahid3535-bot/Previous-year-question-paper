@@ -1,0 +1,648 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration - Mother Theresa Degree College</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- College Name -->
+        <marquee behavior="scroll"
+                 direction="left"
+                 scrollamount="10">
+
+            MOTHER THERESA DEGREE COLLEGE
+
+        </marquee>
+
+
+        <!-- Page Heading -->
+        <div class="subtitle">
+            Student Registration
+        </div>
+
+
+        <!-- Registration Box -->
+        <div class="register-box">
+
+            <form id="registerForm">
+
+                <!-- Full Name -->
+                <div class="form-group">
+
+                    <label for="fullname">
+                        Full Name
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="fullname"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <small id="name-error"></small>
+
+                </div>
+
+
+                <!-- Student ID -->
+                <div class="form-group">
+
+                    <label for="studentId">
+                        Student ID / Roll Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="Enter student ID"
+                            required
+                        >
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                    </div>
+
+                    <small id="id-error"></small>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email ID
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="user@example.com"
+                            required
+                        >
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                    </div>
+
+                    <small id="email-error"></small>
+
+                </div>
+
+
+                <!-- Mobile -->
+                <div class="form-group">
+
+                    <label for="mobile">
+                        Mobile Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            placeholder="Enter 10 digit mobile number"
+                            maxlength="10"
+                            required
+                        >
+
+                        <i class="fa-solid fa-phone"></i>
+
+                    </div>
+
+                    <small id="mobile-error"></small>
+
+                </div>
+
+
+                <!-- Course -->
+                <div class="form-group">
+
+                    <label for="course">
+                        Course
+                    </label>
+
+                    <select id="course" required>
+
+                        <option value="">
+                            Select Course
+                        </option>
+
+                        <option value="B.Sc Computer Science">
+                            B.Sc Computer Science
+                        </option>
+
+                        <option value="B.Sc Data Science">
+                            B.Sc Data Science
+                        </option>
+
+                        <option value="B.Com">
+                            B.Com
+                        </option>
+
+                        <option value="BBA">
+                            BBA
+                        </option>
+
+                    </select>
+
+                    <small id="course-error"></small>
+
+                </div>
+
+
+                <!-- Department -->
+                <div class="form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select id="department" required>
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="Computer Science">
+                            Computer Science
+                        </option>
+
+                        <option value="Data Science">
+                            Data Science
+                        </option>
+
+                        <option value="Commerce">
+                            Commerce
+                        </option>
+
+                        <option value="Management">
+                            Management
+                        </option>
+
+                    </select>
+
+                    <small id="department-error"></small>
+
+                </div>
+
+
+                <!-- Year / Semester -->
+                <div class="form-group">
+
+                    <label for="year">
+                        Year / Semester
+                    </label>
+
+                    <select id="year" required>
+
+                        <option value="">
+                            Select Year / Semester
+                        </option>
+
+                        <option value="1st Year - 1st Semester">
+                            1st Year - 1st Semester
+                        </option>
+
+                        <option value="1st Year - 2nd Semester">
+                            1st Year - 2nd Semester
+                        </option>
+
+                        <option value="2nd Year - 3rd Semester">
+                            2nd Year - 3rd Semester
+                        </option>
+
+                        <option value="2nd Year - 4th Semester">
+                            2nd Year - 4th Semester
+                        </option>
+
+                        <option value="3rd Year - 5th Semester">
+                            3rd Year - 5th Semester
+                        </option>
+
+                        <option value="3rd Year - 6th Semester">
+                            3rd Year - 6th Semester
+                        </option>
+
+                    </select>
+
+                    <small id="year-error"></small>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create password"
+                            required
+                        >
+
+                        <i class="fa-solid fa-eye-slash"
+                           id="togglePassword"></i>
+
+                    </div>
+
+                    <small id="password-error"></small>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            required
+                        >
+
+                        <i class="fa-solid fa-eye-slash"
+                           id="toggleConfirmPassword"></i>
+
+                    </div>
+
+                    <small id="confirm-error"></small>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="bottom-section">
+
+                    <div class="buttons">
+
+                        <!-- Register -->
+                        <button
+                            type="submit"
+                            class="register-btn">
+
+                            Register
+
+                        </button>
+
+
+                        <!-- Back to Login -->
+                        <button
+                            type="button"
+                            class="login-btn"
+                            onclick="window.location.href='form.html'">
+
+                            Back to Login
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        /* GET FORM ELEMENTS */
+
+        const form =
+            document.getElementById("registerForm");
+
+        const email =
+            document.getElementById("email");
+
+        const mobile =
+            document.getElementById("mobile");
+
+        const password =
+            document.getElementById("password");
+
+        const confirmPassword =
+            document.getElementById("confirmPassword");
+
+
+        /* EMAIL VALIDATION */
+
+        email.addEventListener("input", function () {
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            const error =
+                document.getElementById("email-error");
+
+
+            if (email.value === "") {
+
+                error.textContent =
+                    "Please enter your email";
+
+                error.style.color = "#d8e5ff";
+
+            }
+
+            else if (!emailPattern.test(email.value)) {
+
+                error.textContent =
+                    "Please enter a valid email ID";
+
+                error.style.color = "red";
+
+            }
+
+            else {
+
+                error.textContent =
+                    "Valid email ✓";
+
+                error.style.color = "lightgreen";
+
+            }
+
+        });
+
+
+        /* MOBILE VALIDATION */
+
+        mobile.addEventListener("input", function () {
+
+            const mobilePattern =
+                /^[0-9]{10}$/;
+
+            const error =
+                document.getElementById("mobile-error");
+
+
+            if (!mobilePattern.test(mobile.value)) {
+
+                error.textContent =
+                    "Enter a valid 10 digit mobile number";
+
+                error.style.color = "red";
+
+            }
+
+            else {
+
+                error.textContent =
+                    "Valid mobile number ✓";
+
+                error.style.color = "lightgreen";
+
+            }
+
+        });
+
+
+        /* PASSWORD VALIDATION */
+
+        password.addEventListener("input", function () {
+
+            const error =
+                document.getElementById("password-error");
+
+
+            if (password.value.length < 6) {
+
+                error.textContent =
+                    "Password must contain at least 6 characters";
+
+                error.style.color = "red";
+
+            }
+
+            else {
+
+                error.textContent =
+                    "Strong password ✓";
+
+                error.style.color = "lightgreen";
+
+            }
+
+        });
+
+
+        /* CONFIRM PASSWORD VALIDATION */
+
+        confirmPassword.addEventListener("input", function () {
+
+            const error =
+                document.getElementById("confirm-error");
+
+
+            if (confirmPassword.value !== password.value) {
+
+                error.textContent =
+                    "Passwords do not match";
+
+                error.style.color = "red";
+
+            }
+
+            else {
+
+                error.textContent =
+                    "Passwords match ✓";
+
+                error.style.color = "lightgreen";
+
+            }
+
+        });
+
+
+        /* FORM SUBMISSION */
+
+        form.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            const mobilePattern =
+                /^[0-9]{10}$/;
+
+
+            /* EMAIL CHECK */
+
+            if (!emailPattern.test(email.value)) {
+
+                alert("Please enter a valid email ID");
+
+                return;
+
+            }
+
+
+            /* MOBILE CHECK */
+
+            if (!mobilePattern.test(mobile.value)) {
+
+                alert("Please enter a valid mobile number");
+
+                return;
+
+            }
+
+
+            /* PASSWORD CHECK */
+
+            if (password.value.length < 6) {
+
+                alert(
+                    "Password must contain at least 6 characters"
+                );
+
+                return;
+
+            }
+
+
+            /* CONFIRM PASSWORD CHECK */
+
+            if (password.value !== confirmPassword.value) {
+
+                alert("Passwords do not match");
+
+                return;
+
+            }
+
+
+            /* SUCCESS */
+
+            alert("Registration successful!");
+
+        });
+
+
+        /* SHOW / HIDE PASSWORD */
+
+        document
+            .getElementById("togglePassword")
+            .addEventListener("click", function () {
+
+                if (password.type === "password") {
+
+                    password.type = "text";
+
+                    this.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+                    this.classList.add(
+                        "fa-eye"
+                    );
+
+                }
+
+                else {
+
+                    password.type = "password";
+
+                    this.classList.remove(
+                        "fa-eye"
+                    );
+
+                    this.classList.add(
+                        "fa-eye-slash"
+                    );
+
+                }
+
+            });
+
+
+        /* SHOW / HIDE CONFIRM PASSWORD */
+
+        document
+            .getElementById("toggleConfirmPassword")
+            .addEventListener("click", function () {
+
+                if (confirmPassword.type === "password") {
+
+                    confirmPassword.type = "text";
+
+                    this.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+                    this.classList.add(
+                        "fa-eye"
+                    );
+
+                }
+
+                else {
+
+                    confirmPassword.type = "password";
+
+                    this.classList.remove(
+                        "fa-eye"
+                    );
+
+                    this.classList.add(
+                        "fa-eye-slash"
+                    );
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
+```

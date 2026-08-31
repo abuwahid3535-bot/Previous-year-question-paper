@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Courses | Mother Theresa Degree College</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+rel="stylesheet">
+
+
+<style>
+
+/* ================= BASIC ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#f6f8fb;
+    color:#202938;
+}
+
+
+/* ================= TOP BAR ================= */
+
+.top-bar{
+
+    background:#0b1f3a;
+
+    color:white;
+
+    padding:9px 7%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:12px;
+
+}
+
+
+/* ================= HEADER ================= */
+
+header{
+
+    background:white;
+
+    padding:20px 7%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-bottom:1px solid #e5e9ef;
+
+}
+
+.header-title{
+
+    color:#0b1f3a;
+
+    font-family:'Playfair Display',serif;
+
+    font-size:22px;
+
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+
+    min-height:300px;
+
+    background:
+
+    linear-gradient(
+
+        rgba(11,31,58,.94),
+
+        rgba(11,31,58,.82)
+
+    ),
+
+    url("degree.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:55px 8%;
+
+}
+
+
+.hero-content{
+
+    max-width:800px;
+
+}
+
+
+.hero-small{
+
+    color:#d5ad45;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+
+}
+
+
+.hero h1{
+
+    color:white;
+
+    font-family:'Playfair Display',serif;
+
+    font-size:46px;
+
+    margin-bottom:15px;
+
+}
+
+
+.hero p{
+
+    color:#d9e1ec;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+
+/* ================= MAIN ================= */
+
+main{
+
+    width:86%;
+
+    max-width:1100px;
+
+    margin:55px auto;
+
+}
+
+
+/* ================= PAGE HEADING ================= */
+
+.page-heading{
+
+    text-align:center;
+
+    margin-bottom:42px;
+
+}
+
+
+.page-heading h2{
+
+    color:#0b1f3a;
+
+    font-family:'Playfair Display',serif;
+
+    font-size:30px;
+
+}
+
+
+.line{
+
+    width:55px;
+
+    height:3px;
+
+    background:#d5ad45;
+
+    margin:12px auto;
+
+}
+
+
+.page-heading p{
+
+    color:#7b8491;
+
+    font-size:14px;
+
+}
+
+
+/* ================= DEPARTMENT ================= */
+
+.department{
+
+    background:white;
+
+    border-radius:10px;
+
+    margin-bottom:25px;
+
+    overflow:hidden;
+
+    border:1px solid #e2e7ed;
+
+    box-shadow:
+
+        0 7px 24px rgba(20,35,55,.06);
+
+}
+
+
+/* ================= DEPARTMENT TITLE ================= */
+
+.department-title{
+
+    background:#0b1f3a;
+
+    padding:22px 28px;
+
+    color:white;
+
+}
+
+
+.department-title h3{
+
+    font-size:19px;
+
+    font-weight:600;
+
+}
+
+
+.department-title p{
+
+    color:#bfcbd9;
+
+    font-size:12px;
+
+    margin-top:5px;
+
+}
+
+
+/* ================= COURSE LIST ================= */
+
+.course-list{
+
+    padding:5px 28px;
+
+}
+
+
+/* ================= COURSE ================= */
+
+.course{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:20px 5px;
+
+    border-bottom:1px solid #edf0f3;
+
+    transition:.25s;
+
+}
+
+
+.course:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.course:hover{
+
+    background:#fafbfd;
+
+    padding-left:12px;
+
+}
+
+
+.course-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:17px;
+
+}
+
+
+/* ================= NUMBER ================= */
+
+.number{
+
+    width:38px;
+
+    height:38px;
+
+    border:1px solid #d5ad45;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#987522;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    flex-shrink:0;
+
+}
+
+
+/* ================= COURSE TEXT ================= */
+
+.course h4{
+
+    color:#1d2a3b;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+
+.course p{
+
+    color:#8a929d;
+
+    font-size:12px;
+
+    margin-top:4px;
+
+}
+
+
+/* ================= ARROW ================= */
+
+.arrow{
+
+    color:#0b1f3a;
+
+    font-size:18px;
+
+    padding-right:5px;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    background:#08172b;
+
+    color:#bfcbd9;
+
+    text-align:center;
+
+    padding:25px;
+
+    font-size:12px;
+
+}
+
+
+/* ================= TABLET ================= */
+
+@media(max-width:700px){
+
+    .top-bar{
+
+        display:none;
+
+    }
+
+
+    header{
+
+        padding:16px;
+
+    }
+
+
+    .header-title{
+
+        font-size:19px;
+
+    }
+
+
+    .hero{
+
+        min-height:270px;
+
+        padding:45px 7%;
+
+    }
+
+
+    .hero h1{
+
+        font-size:35px;
+
+    }
+
+
+    main{
+
+        width:92%;
+
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:480px){
+
+    .header-title{
+
+        font-size:17px;
+
+        text-align:center;
+
+    }
+
+
+    .hero h1{
+
+        font-size:29px;
+
+    }
+
+
+    .hero p{
+
+        font-size:13px;
+
+    }
+
+
+    .department-title{
+
+        padding:18px 20px;
+
+    }
+
+
+    .course-list{
+
+        padding:5px 20px;
+
+    }
+
+
+    .course h4{
+
+        font-size:14px;
+
+    }
+
+
+    .course p{
+
+        font-size:11px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     TOP BAR
+================================================== -->
+
+<div class="top-bar">
+
+    <span>
+        Academic Portal
+    </span>
+
+    <span>
+        Mother Theresa Degree College
+    </span>
+
+</div>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <div class="header-title">
+        Courses Offered
+    </div>
+
+</header>
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            Mother Theresa Degree College
+        </div>
+
+        <h1>
+            Courses Offered
+        </h1>
+
+        <p>
+            Explore the academic programmes offered
+            through the various departments of the college.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     MAIN CONTENT
+================================================== -->
+
+<main>
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading">
+
+        <h2>
+            Departments & Courses
+        </h2>
+
+        <div class="line"></div>
+
+        <p>
+            Explore the undergraduate programmes
+            available at the college.
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         DEPARTMENT OF COMMERCE
+    ================================================== -->
+
+    <div class="department">
+
+        <div class="department-title">
+
+            <h3>
+                Department of Commerce
+            </h3>
+
+            <p>
+                Commerce and business studies
+            </p>
+
+        </div>
+
+
+        <div class="course-list">
+
+
+            <div class="course">
+
+                <div class="course-left">
+
+                    <div class="number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Bachelor of Commerce
+                        </h4>
+
+                        <p>
+                            B.Com
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         DEPARTMENT OF COMPUTER SCIENCE
+    ================================================== -->
+
+    <div class="department">
+
+        <div class="department-title">
+
+            <h3>
+                Department of Computer Science
+            </h3>
+
+            <p>
+                Computer applications, computer science
+                and data science
+            </p>
+
+        </div>
+
+
+        <div class="course-list">
+
+
+            <!-- BCA -->
+
+            <div class="course">
+
+                <div class="course-left">
+
+                    <div class="number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Bachelor of Computer Applications
+                        </h4>
+
+                        <p>
+                            BCA
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- BCA AI -->
+
+            <div class="course">
+
+                <div class="course-left">
+
+                    <div class="number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Bachelor of Computer Applications
+                            in Artificial Intelligence
+                        </h4>
+
+                        <p>
+                            BCA (AI)
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- BSC COMPUTER SCIENCE -->
+
+            <div class="course">
+
+                <div class="course-left">
+
+                    <div class="number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Bachelor of Science
+                            in Computer Science
+                        </h4>
+
+                        <p>
+                            B.Sc Computer Science
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- BSC DATA SCIENCE -->
+
+            <div class="course">
+
+                <div class="course-left">
+
+                    <div class="number">
+                        04
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Bachelor of Science
+                            in Data Science
+                        </h4>
+
+                        <p>
+                            B.Sc Data Science
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         DEPARTMENT OF MANAGEMENT
+    ================================================== -->
+
+    <div class="department">
+
+        <div class="department-title">
+
+            <h3>
+                Department of Management
+            </h3>
+
+            <p>
+                Business administration and management
+            </p>
+
+        </div>
+
+
+        <div class="course-list">
+
+
+            <div class="course">
+
+                <div class="course-left">
+
+                    <div class="number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Bachelor of Business Administration
+                        </h4>
+
+                        <p>
+                            BBA
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    © 2026 Mother Theresa Degree College
+
+</footer>
+
+
+</body>
+
+</html>
