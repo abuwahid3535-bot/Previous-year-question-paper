@@ -417,6 +417,7 @@
                             localStorage.setItem('mtcUserType', 'staff');
                             localStorage.setItem('mtcUserName', data.name);
                             localStorage.setItem('mtcUserEmail', data.email);
+                            localStorage.setItem('mtcIsAdmin', data.is_admin === 1 ? 'true' : 'false');
 
                             alert("Welcome " + data.name + "! Login successful!");
 
