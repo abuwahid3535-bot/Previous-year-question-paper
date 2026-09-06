@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & FAQ - Mother Theresa Degree College</title>
+    <meta name="description" content="About Mother Theresa Degree College's student portal and frequently asked questions about question papers, results, and accounts.">
+    <meta property="og:title" content="About & FAQ | Mother Theresa Degree College">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #f7f9fb; }
+        .navbar { background: #1a5276; color: white; padding: 15px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .navbar .brand { font-weight: 700; font-size: 18px; }
+        .navbar .brand i { margin-right: 8px; }
+        .navbar a { color: white; text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: 500; }
+        .navbar a:hover { color: #f39c12; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .card { background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); padding: 30px; margin-bottom: 25px; }
+        .card h2 { color: #1a5276; margin-bottom: 15px; font-size: 22px; }
+        .card h2 i { margin-right: 8px; }
+        .card p, .card li { color: #444; font-size: 14px; line-height: 1.7; }
+        .card ul { padding-left: 20px; margin-top: 10px; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 16px 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { font-weight: 600; color: #1a5276; cursor: pointer; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .faq-q i { color: #f39c12; font-size: 13px; }
+        .faq-a { display: none; color: #555; font-size: 14px; padding-top: 10px; line-height: 1.7; }
+        footer { text-align: center; padding: 20px; color: #888; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand"><i class="fa-solid fa-graduation-cap"></i> Mother Theresa Degree College</div>
+        <div>
+            <a href="openwebsite.html">Home</a>
+            <a href="form.html">Login</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2><i class="fa-solid fa-building-columns"></i> About the Portal</h2>
+            <p>
+                Mother Theresa Degree College's student portal gives students and staff a single place to
+                access examination question papers, educational resources, exam results, and college
+                contact information.
+            </p>
+            <ul>
+                <li>Browse and download previous question papers by course, semester, year or subject.</li>
+                <li>Check your published exam results and grading summaries.</li>
+                <li>Staff members can upload question papers and study documents for student use.</li>
+                <li>Update your profile and change your password securely.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-circle-question"></i> Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">How do I log in? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">Go to the Login page. Students use their registered email and password
+                    (the Student option). Staff and administrators use the Staff option with their college email and password.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">I forgot my password. What should I do? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">Use the "Forgot Password" link on the Login page. Enter your registered
+                    mobile number and follow the OTP verification steps to set a new password.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Where do I find question papers? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">Open the Home page and use the search section to filter by course,
+                    semester, year or subject, then click View or Download. You must be logged in.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">How do I see my exam results? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">After logging in as a student, the "My Results" section on your dashboard
+                    shows the marks published for you, including an overall score summary.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">A staff account says it is pending. What now? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">New staff accounts are reviewed by the administrator. Wait for approval;
+                    you will be able to log in once the account is approved.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">How can I contact the college? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">Use the Contact page to send a message through the portal, or visit the
+                    office hours listed there.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 Mother Theresa Degree College</footer>
+
+    <script>
+        function toggleFaq(el) {
+            var answer = el.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                el.querySelector('i').classList.replace('fa-chevron-up', 'fa-chevron-down');
+            } else {
+                answer.style.display = 'block';
+                el.querySelector('i').classList.replace('fa-chevron-down', 'fa-chevron-up');
+            }
+        }
+    </script>
+</body>
+</html>

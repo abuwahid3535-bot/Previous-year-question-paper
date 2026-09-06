@@ -8,6 +8,8 @@
 
     <title>Staff Registration - Mother Theresa Degree College</title>
 
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
     <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -368,7 +370,6 @@
 
                 </div>
 
-
                 <!-- ================= DEPARTMENT ================= -->
 
                 <div class="form-group">
@@ -639,9 +640,8 @@
             error.style.color = "lightgreen";
 
         }
-
-    });
-
+});
+    
 
     /* =====================================================
        MOBILE VALIDATION
@@ -775,9 +775,7 @@
                 return;
 
             }
-
-
-            /* MOBILE */
+/* MOBILE */
 
             if (!mobilePattern.test(mobile.value)) {
 
@@ -786,6 +784,7 @@
                 );
 
                 return;
+
 
             }
 
@@ -799,6 +798,7 @@
                 );
 
                 return;
+
 
             }
 
@@ -816,21 +816,52 @@
 
                 return;
 
+
             }
 
 
-            /* SUCCESS */
+            /* SUBMIT TO SERVER */
 
-            alert(
-                "Staff registration successful!"
-            );
+            var submitBtn = form.querySelector('button[type="submit"]');
+            var originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Registering...';
+            submitBtn.disabled = true;
 
+            fetch('includes/register_staff.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    full_name: document.getElementById("fullname").value,
+                    email: email.value,
+                    mobile: mobile.value,
+                    staff_id: document.getElementById("staffId").value,
+                    department: document.getElementById("department").value,
+                    designation: document.getElementById("designation").value,
+                    qualification: document.getElementById("qualification").value,
+                    password: password.value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
 
-            form.reset();
+                if (data.success) {
+                    alert('Staff registration submitted! An administrator will approve your account before you can login.');
+                    window.location.href = 'stafflogin.html';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                alert('Error registering. Please try again.');
+            });
 
         }
     );
-
 
     /* =====================================================
        SHOW / HIDE PASSWORD

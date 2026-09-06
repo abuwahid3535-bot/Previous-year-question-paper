@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Theresa Degree College - Contact Us</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 100vh;
+            background: linear-gradient(180deg, #062b63 0%, #0b4ea2 100%);
+            color: white;
+            padding: 20px 0;
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar:hover {
+            width: 260px;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 10px 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0b4ea2;
+            transition: 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header .logo {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header h3 {
+            opacity: 1;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header p {
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #ffca28;
+        }
+
+        .sidebar-menu a i {
+            margin-right: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-menu a span {
+            opacity: 1;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            background: rgba(255,68,68,0.3);
+            border-radius: 6px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .sidebar-footer a:hover {
+            background: rgba(255,68,68,0.5);
+        }
+
+        .sidebar-footer a i {
+            margin-right: 10px;
+        }
+
+        .sidebar-footer a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-footer a span {
+            opacity: 1;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 70px;
+            padding: 20px 30px;
+            transition: margin-left 0.3s;
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: 260px;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .top-bar h2 {
+            color: #062b63;
+            font-size: 22px;
+        }
+
+        /* CONTACT GRID */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-header h3 {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* CONTACT INFO */
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: #0b4ea2;
+        }
+
+        .contact-info h4 {
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info p {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .contact-info a {
+            color: #0b4ea2;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAP */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0b4ea2;
+            box-shadow: 0 0 0 3px rgba(11, 78, 162, 0.1);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #0b4ea2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #093d82;
+        }
+
+        /* SOCIAL LINKS */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 18px;
+        }
+
+        .social-link:hover {
+            background: #0b4ea2;
+            color: white;
+        }
+
+        .social-link.facebook:hover { background: #3b5998; }
+        .social-link.twitter:hover { background: #1da1f2; }
+        .social-link.instagram:hover { background: #e4405f; }
+        .social-link.youtube:hover { background: #ff0000; }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 2000;
+            background: rgba(11, 78, 162, 0.1);
+            border: 1px solid rgba(11, 78, 162, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0b4ea2;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(11, 78, 162, 0.2);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .top-bar h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar a {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .card {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .card-header {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .card-header h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .contact-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .contact-info h4 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .contact-info p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .contact-info a {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .hours-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .hours-item .day {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .hours-item .time {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: #0f172a;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group textarea:focus {
+            border-color: #0b4ea2;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* HOURS */
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .hours-item .day {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .hours-item .time {
+            color: #666;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .sidebar-header h3,
+            .sidebar-header p,
+            .sidebar-menu a span,
+            .sidebar-footer a span {
+                opacity: 0;
+            }
+            .sidebar:hover .sidebar-header h3,
+            .sidebar:hover .sidebar-header p,
+            .sidebar:hover .sidebar-menu a span,
+            .sidebar:hover .sidebar-footer a span {
+                opacity: 1;
+            }
+            .main-content {
+                margin-left: 70px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+        <span id="themeText">Light</span>
+    </button>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">M</div>
+            <h3>Mother Theresa</h3>
+            <p>Degree College</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="student_dashboard.html" id="linkDashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="openwebsite.html">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Question Papers</span>
+            </a>
+            <a href="course.html" id="linkCourses">
+                <i class="fa-solid fa-book"></i>
+                <span>Courses</span>
+            </a>
+            <a href="profile.html" id="linkProfile">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+            <a href="contact.html" class="active">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="#" onclick="logoutUser()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <h2><i class="fa-solid fa-phone"></i> Contact Us</h2>
+            <div class="user-info">
+                <a href="student_dashboard.html" id="linkBackDashboard" style="color:#0b4ea2; text-decoration:none; font-size:14px;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- CONTACT GRID -->
+        <div class="contact-grid">
+            <!-- LEFT: CONTACT INFO -->
+            <div>
+                <!-- College Info -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-building-columns"></i> College Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="contact-info">
+                                <h4>Address</h4>
+                                <p>Mother Theresa Institutions</p>
+                                <p>Degree Block, NH219,</p>
+                                <p>Gangavaram, Melmoi,</p>
+                                <p>Andhra Pradesh 517408</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="contact-info">
+                                <h4>Phone Numbers</h4>
+                                <p><a href="tel:+918579268585">08579 - 268585</a> (Office)</p>
+                                <p><a href="tel:+919494624634">+91 94946 24634</a> (Call Us)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="contact-info">
+                                <h4>Email</h4>
+                                <p><a href="mailto:Mtidegree@Gmail.Com">Mtidegree@Gmail.Com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                            <div class="contact-info">
+                                <h4>Website</h4>
+                                <p><a href="https://www.mtideg.edu.in/" target="_blank">www.mtideg.edu.in</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="social-links">
+                            <a href="https://www.facebook.com" class="social-link facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://twitter.com" class="social-link twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="https://www.instagram.com" class="social-link instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.youtube.com" class="social-link youtube" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Office Hours -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-clock"></i> Office Hours</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="hours-item">
+                            <span class="day">Monday - Friday</span>
+                            <span class="time">9:00 AM - 5:00 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Saturday</span>
+                            <span class="time">9:00 AM - 1:00 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Sunday</span>
+                            <span class="time">Closed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: CONTACT FORM & MAP -->
+            <div>
+                <!-- Map -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-map-location-dot"></i> Our Location</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5!2d78.72971379458396!3d13.244354926126297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s13.244354926126297%2C78.72971379458396!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-paper-plane"></i> Send us a Message</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" id="contactName" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Email</label>
+                                <input type="email" id="contactEmail" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="text" id="contactSubject" placeholder="Enter subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea id="contactMessage" placeholder="Write your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="sendBtn">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
+                            <small id="formMessage" style="display:block; margin-top:15px;"></small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loggedIn = localStorage.getItem('mtcLoggedIn');
+            var userType = localStorage.getItem('mtcUserType');
+            var userName = localStorage.getItem('mtcUserName');
+            var userEmail = localStorage.getItem('mtcUserEmail');
+
+            if (!loggedIn || (userType !== 'student' && userType !== 'staff')) {
+                alert('Please login first');
+                window.location.href = userType === 'staff' ? 'stafflogin.html' : 'form.html';
+                return;
+            }
+
+            // Adjust navigation for staff
+            if (userType === 'staff') {
+                var dashUrl = 'staff_dashboard.html';
+                document.getElementById('linkDashboard').href = dashUrl;
+                document.getElementById('linkBackDashboard').href = dashUrl;
+                document.getElementById('linkCourses').style.display = 'none';
+                document.getElementById('linkProfile').style.display = 'none';
+            }
+
+            // Pre-fill name and email
+            document.getElementById('contactName').value = userName || '';
+            document.getElementById('contactEmail').value = userEmail || '';
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var submitBtn = document.getElementById('sendBtn');
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            fetch('includes/submit_contact.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: document.getElementById('contactName').value,
+                    email: document.getElementById('contactEmail').value,
+                    subject: document.getElementById('contactSubject').value,
+                    message: document.getElementById('contactMessage').value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+                submitBtn.disabled = false;
+
+                var msg = document.getElementById('formMessage');
+                if (data.success) {
+                    msg.textContent = 'Message sent successfully! We will get back to you soon.';
+                    msg.style.color = '#28a745';
+                    document.getElementById('contactForm').reset();
+                } else {
+                    msg.textContent = data.message;
+                    msg.style.color = '#dc3545';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+                submitBtn.disabled = false;
+                document.getElementById('formMessage').textContent = 'Error sending message';
+                document.getElementById('formMessage').style.color = '#dc3545';
+            });
+        });
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                fetch('includes/logout.php', { method: 'POST', keepalive: true });
+                var userType = localStorage.getItem('mtcUserType');
+                localStorage.removeItem('mtcLoggedIn');
+                localStorage.removeItem('mtcUserType');
+                localStorage.removeItem('mtcUserName');
+                localStorage.removeItem('mtcUserEmail');
+                if (userType === 'staff') {
+                    localStorage.removeItem('mtcIsAdmin');
+                    window.location.href = 'stafflogin.html';
+                } else {
+                    localStorage.removeItem('mtcIsAdmin');
+                    window.location.href = 'form.html';
+                }
+            }
+        }
+
+        /* DARK / LIGHT MODE TOGGLE */
+        function toggleTheme() {
+            var body = document.body;
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+            } else {
+                body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+            }
+        }
+
+        /* Load saved theme */
+        (function () {
+            var savedTheme = localStorage.getItem("mtcTheme");
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+            } else if (savedTheme === "light") {
+                document.body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+            }
+        })();
+    </script>
+</body>
+</html>

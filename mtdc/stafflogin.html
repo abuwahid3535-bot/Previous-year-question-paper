@@ -1,337 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Mother Theresa Degree College - Staff Sign In</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
-
 <body>
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+        <span id="themeText">Dark</span>
+    </button>
 
     <div class="container">
-
-        <!-- College Name -->
-        <marquee behavior="scroll"
-                 direction="left"
-                 scrollamount="10">
-
+        <marquee behavior="scroll" direction="left" scrollamount="10">
             MOTHER THERESA DEGREE COLLEGE
-
         </marquee>
 
+        <div class="subtitle">Staff Sign In</div>
 
-        <!-- Staff Sign In -->
-        <div class="subtitle">
-            Staff Sign In
-        </div>
-
-
-        <!-- Sign In Box -->
         <div class="login-box">
-
             <form id="staffLoginForm">
-
-                <!-- Staff Email -->
                 <div class="form-group">
-
-                    <label for="staffEmail">
-                        Staff Email ID
-                    </label>
-
+                    <label for="staffEmail">Email or Staff ID</label>
                     <div class="input-box">
-
-                        <input
-                            type="text"
-                            id="staffEmail"
-                            placeholder="staff@example.com"
-                        >
-
+                        <input type="text" id="staffEmail" placeholder="Email or Staff ID">
                         <i class="fa-solid fa-user-tie"></i>
-
                     </div>
-
-                    <small id="staff-email-error">
-                        Please enter your staff email ID
-                    </small>
-
+                    <small id="staff-email-error"></small>
                 </div>
 
-
-                <!-- Password -->
                 <div class="form-group">
-
-                    <label for="staffPassword">
-                        Password
-                    </label>
-
+                    <label for="staffPassword">Password</label>
                     <div class="input-box">
-
-                        <input
-                            type="password"
-                            id="staffPassword"
-                            placeholder="Password"
-                        >
-
-                        <i class="fa-solid fa-eye-slash"
-                           id="toggleStaffPassword"></i>
-
+                        <input type="password" id="staffPassword" placeholder="Password">
+                        <i class="fa-solid fa-eye-slash" id="toggleStaffPassword"></i>
                     </div>
-
-                    <small id="staff-password-error">
-                        Please enter your password
-                    </small>
-
+                    <small id="staff-password-error"></small>
                 </div>
 
-
-                <!-- Bottom Section -->
                 <div class="bottom-section">
-
                     <div class="buttons">
-
-                        <!-- Sign In -->
-                        <button
-                            type="submit"
-                            class="login-btn">
-
-                            Sign In
-
-                        </button>
-
-
-                        <!-- Sign Up -->
-                        <button
-                            type="button"
-                            class="register-btn"
-                            onclick="window.location.href='staffregister.html'">
-
-                            Sign Up
-
-                        </button>
-
+                        <button type="submit" class="login-btn" id="staffSigninBtn">Sign In</button>
+                        <button type="button" class="register-btn" onclick="window.location.href='staffregister.html'">Sign Up</button>
                     </div>
-
-
                     <div class="links">
-
-                        <a href="#">
-                            Forgot Password?
-                        </a>
-
-                        <a href="#">
-                            Help
-                        </a>
-
+                        <a href="staff_forgot_password.html">Forgot Password?</a>
                     </div>
-
                 </div>
-
             </form>
-
         </div>
-
     </div>
 
-
-    <!-- JavaScript -->
     <script>
+        var staffLoginForm = document.getElementById("staffLoginForm");
+        var staffEmail = document.getElementById("staffEmail");
+        var staffPassword = document.getElementById("staffPassword");
+        var staffEmailError = document.getElementById("staff-email-error");
+        var staffPasswordError = document.getElementById("staff-password-error");
 
-        // Get elements
-        const staffLoginForm =
-            document.getElementById("staffLoginForm");
-
-        const staffEmail =
-            document.getElementById("staffEmail");
-
-        const staffPassword =
-            document.getElementById("staffPassword");
-
-        const staffEmailError =
-            document.getElementById("staff-email-error");
-
-        const staffPasswordError =
-            document.getElementById("staff-password-error");
-
-
-        // Staff Email Validation
-        staffEmail.addEventListener("input", function () {
-
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
+        staffEmail.addEventListener("input", function() {
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (staffEmail.value === "") {
-
-                staffEmailError.textContent =
-                    "Please enter your staff email ID";
-
-                staffEmailError.style.color =
-                    "#d8e5ff";
-
+                staffEmailError.textContent = "Please enter your email or staff ID";
+                staffEmailError.style.color = "#d8e5ff";
+            } else if (emailPattern.test(staffEmail.value) || staffEmail.value.length >= 3) {
+                staffEmailError.textContent = "Valid input";
+                staffEmailError.style.color = "lightgreen";
+            } else {
+                staffEmailError.textContent = "Please enter a valid email or staff ID";
+                staffEmailError.style.color = "red";
             }
-
-            else if (!emailPattern.test(staffEmail.value)) {
-
-                staffEmailError.textContent =
-                    "Please enter a valid staff email ID";
-
-                staffEmailError.style.color =
-                    "red";
-
-            }
-
-            else {
-
-                staffEmailError.textContent =
-                    "Valid staff email ID ✓";
-
-                staffEmailError.style.color =
-                    "lightgreen";
-
-            }
-
         });
 
-
-        // Staff Password Validation
-        staffPassword.addEventListener("input", function () {
-
+        staffPassword.addEventListener("input", function() {
             if (staffPassword.value === "") {
-
-                staffPasswordError.textContent =
-                    "Please enter your password";
-
-                staffPasswordError.style.color =
-                    "#d8e5ff";
-
+                staffPasswordError.textContent = "Please enter your password";
+                staffPasswordError.style.color = "#d8e5ff";
+            } else if (staffPassword.value.length < 6) {
+                staffPasswordError.textContent = "Password must contain at least 6 characters";
+                staffPasswordError.style.color = "red";
+            } else {
+                staffPasswordError.textContent = "Valid password ✓";
+                staffPasswordError.style.color = "lightgreen";
             }
-
-            else if (staffPassword.value.length < 6) {
-
-                staffPasswordError.textContent =
-                    "Password must contain at least 6 characters";
-
-                staffPasswordError.style.color =
-                    "red";
-
-            }
-
-            else {
-
-                staffPasswordError.textContent =
-                    "Valid password ✓";
-
-                staffPasswordError.style.color =
-                    "lightgreen";
-
-            }
-
         });
 
+        staffLoginForm.addEventListener("submit", function(event) {
+            event.preventDefault();
 
-        // Staff Sign In Validation
-        staffLoginForm.addEventListener(
-            "submit",
-            function (event) {
+            var valid = true;
 
-                event.preventDefault();
-
-                const emailPattern =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                let valid = true;
-
-
-                // Check Staff Email
-                if (!emailPattern.test(staffEmail.value)) {
-
-                    staffEmailError.textContent =
-                        "Please enter a valid staff email ID";
-
-                    staffEmailError.style.color =
-                        "red";
-
-                    valid = false;
-
-                }
-
-
-                // Check Password
-                if (staffPassword.value.length < 6) {
-
-                    staffPasswordError.textContent =
-                        "Password must contain at least 6 characters";
-
-                    staffPasswordError.style.color =
-                        "red";
-
-                    valid = false;
-
-                }
-
-
-                // If everything is valid
-                if (valid) {
-
-                    alert("Staff Sign In successful!");
-
-                }
-
+            if (staffEmail.value === "" || staffEmail.value.length < 3) {
+                staffEmailError.textContent = "Please enter your email or staff ID";
+                staffEmailError.style.color = "red";
+                valid = false;
             }
-        );
 
-
-        // Show / Hide Staff Password
-        const toggleStaffPassword =
-            document.getElementById("toggleStaffPassword");
-
-
-        toggleStaffPassword.addEventListener(
-            "click",
-            function () {
-
-                if (staffPassword.type === "password") {
-
-                    staffPassword.type = "text";
-
-                    toggleStaffPassword.classList.remove(
-                        "fa-eye-slash"
-                    );
-
-                    toggleStaffPassword.classList.add(
-                        "fa-eye"
-                    );
-
-                }
-
-                else {
-
-                    staffPassword.type = "password";
-
-                    toggleStaffPassword.classList.remove(
-                        "fa-eye"
-                    );
-
-                    toggleStaffPassword.classList.add(
-                        "fa-eye-slash"
-                    );
-
-                }
-
+            if (staffPassword.value.length < 6) {
+                staffPasswordError.textContent = "Password must contain at least 6 characters";
+                staffPasswordError.style.color = "red";
+                valid = false;
             }
-        );
 
+            if (!valid) return;
+
+            var originalText = document.getElementById('staffSigninBtn').textContent;
+            document.getElementById('staffSigninBtn').textContent = 'Signing In...';
+            document.getElementById('staffSigninBtn').disabled = true;
+
+            var formData = new FormData();
+            formData.append('staffEmail', staffEmail.value);
+            formData.append('staffPassword', staffPassword.value);
+
+            fetch('includes/login_staff.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Staff login response:", data);
+
+                if (data.status === 'success') {
+                    localStorage.setItem('mtcLoggedIn', 'true');
+                    localStorage.setItem('mtcUserType', 'staff');
+                    localStorage.setItem('mtcUserName', data.name);
+                    localStorage.setItem('mtcUserEmail', data.email);
+                    localStorage.setItem('mtcIsAdmin', data.is_admin === 1 ? 'true' : 'false');
+                    alert("Welcome " + data.name + "! Staff login successful!");
+
+                    if (data.is_admin === 1) {
+                        window.location.href = 'admin_dashboard.html';
+                    } else {
+                        window.location.href = 'staff_dashboard.html';
+                    }
+
+                } else if (data.status === 'error') {
+                    staffEmailError.textContent = data.message;
+                    staffEmailError.style.color = "red";
+                    staffPasswordError.textContent = data.message;
+                    staffPasswordError.style.color = "red";
+                    document.getElementById('staffSigninBtn').textContent = originalText;
+                    document.getElementById('staffSigninBtn').disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Error connecting to server");
+                document.getElementById('staffSigninBtn').textContent = originalText;
+                document.getElementById('staffSigninBtn').disabled = false;
+            });
+        });
+
+        var toggleStaffPassword = document.getElementById("toggleStaffPassword");
+        toggleStaffPassword.addEventListener("click", function() {
+            if (staffPassword.type === "password") {
+                staffPassword.type = "text";
+                toggleStaffPassword.classList.remove("fa-eye-slash");
+                toggleStaffPassword.classList.add("fa-eye");
+            } else {
+                staffPassword.type = "password";
+                toggleStaffPassword.classList.remove("fa-eye");
+                toggleStaffPassword.classList.add("fa-eye-slash");
+            }
+        });
+
+        /* DARK / LIGHT MODE TOGGLE */
+        function toggleTheme() {
+            var body = document.body;
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (body.classList.contains("light-mode")) {
+                body.classList.remove("light-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+            } else {
+                body.classList.add("light-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+            }
+        }
+
+        /* Load saved theme */
+        (function () {
+            var savedTheme = localStorage.getItem("mtcTheme");
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (savedTheme === "light") {
+                document.body.classList.add("light-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+            }
+        })();
     </script>
-
 </body>
-
 </html>

@@ -5,17 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mother Theresa Degree College - Student Sign In</title>
+    <title>Mother Theresa Degree College - Sign In</title>
+
+    <meta name="description" content="Sign in to the Mother Theresa Degree College student and staff portal.">
+    <meta property="og:title" content="Sign In | Mother Theresa Degree College">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
+
+    <!-- Role Toggle Styles -->
+    <style>
+        .role-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .role-toggle button {
+            flex: 1;
+            max-width: 200px;
+            padding: 11px 12px;
+            border: 2px solid #2563eb;
+            background: transparent;
+            color: #9aa8bb;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .role-toggle button:hover {
+            border-color: #60a5fa;
+            color: #d8e5ff;
+        }
+
+        .role-toggle button.active {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        body.light-mode .role-toggle button {
+            color: #334155;
+            background: #ffffff;
+        }
+
+        body.light-mode .role-toggle button:hover {
+            color: #1d4ed8;
+        }
+
+        body.light-mode .role-toggle button.active {
+            background: #2563eb;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+        <span id="themeText">Dark</span>
+    </button>
 
     <div class="container">
 
@@ -29,8 +93,35 @@
         </marquee>
 
 
+        <!-- Role Selection -->
+        <div class="role-toggle">
+
+            <button type="button"
+                    id="studentRoleBtn"
+                    class="active"
+                    onclick="selectRole('student')">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                Student
+
+            </button>
+
+            <button type="button"
+                    id="staffRoleBtn"
+                    onclick="selectRole('staff')">
+
+                <i class="fa-solid fa-chalkboard-user"></i>
+
+                Staff
+
+            </button>
+
+        </div>
+
+
         <!-- Student Sign In -->
-        <div class="subtitle">
+        <div class="subtitle" id="roleSubtitle">
             Student Sign In
         </div>
 
@@ -38,13 +129,13 @@
         <!-- Sign In Box -->
         <div class="login-box">
 
-            <form id="loginForm">
+            <form id="loginForm" action="includes/login_student.php" method="POST">
 
-                <!-- Email -->
+                <!-- Email or Student ID -->
                 <div class="form-group">
 
-                    <label for="email">
-                        Email ID
+                    <label for="email" id="emailLabel">
+                        Email or Student ID
                     </label>
 
                     <div class="input-box">
@@ -52,7 +143,8 @@
                         <input
                             type="text"
                             id="email"
-                            placeholder="user@example.com"
+                            name="email"
+                            placeholder="Email or Student ID"
                         >
 
                         <i class="fa-solid fa-user"></i>
@@ -60,7 +152,7 @@
                     </div>
 
                     <small id="email-error">
-                        Please enter your email ID
+                        Please enter your email or student ID
                     </small>
 
                 </div>
@@ -78,6 +170,7 @@
                         <input
                             type="password"
                             id="password"
+                            name="password"
                             placeholder="Password"
                         >
 
@@ -112,7 +205,7 @@
                         <button
                             type="button"
                             class="register-btn"
-                            onclick="window.location.href='register.html'">
+                            onclick="goSignUp()">
 
                             Sign Up
 
@@ -123,12 +216,16 @@
 
                     <div class="links">
 
-                        <a href="#">
+                        <a href="forgot_password.html" id="forgotLink">
                             Forgot Password?
                         </a>
 
-                        <a href="#">
+                        <a href="contact.html">
                             Help
+                        </a>
+
+                        <a href="about.html">
+                            About & FAQ
                         </a>
 
                     </div>
@@ -145,82 +242,115 @@
     <!-- JavaScript -->
     <script>
 
-        // Get elements
+        /* GET ELEMENTS */
         const loginForm = document.getElementById("loginForm");
-
         const email = document.getElementById("email");
-
         const password = document.getElementById("password");
-
         const emailError = document.getElementById("email-error");
-
-        const passwordError =
-            document.getElementById("password-error");
+        const passwordError = document.getElementById("password-error");
 
 
-        // Email validation
+        /* ROLE SELECTION (Student / Staff) */
+        let currentRole = "student";
+
+        function selectRole(role) {
+
+            currentRole = role;
+
+            const studentBtn = document.getElementById("studentRoleBtn");
+            const staffBtn = document.getElementById("staffRoleBtn");
+            const roleSubtitle = document.getElementById("roleSubtitle");
+            const emailLabel = document.getElementById("emailLabel");
+            const forgotLink = document.getElementById("forgotLink");
+
+            if (role === "staff") {
+
+                studentBtn.classList.remove("active");
+                staffBtn.classList.add("active");
+
+                roleSubtitle.textContent = "Staff Sign In";
+                emailLabel.textContent = "Email or Staff ID";
+                email.placeholder = "Email or Staff ID";
+                email.name = "staffEmail";
+                password.name = "staffPassword";
+
+                forgotLink.href = "staff_forgot_password.html";
+
+            } else {
+
+                staffBtn.classList.remove("active");
+                studentBtn.classList.add("active");
+
+                roleSubtitle.textContent = "Student Sign In";
+                emailLabel.textContent = "Email or Student ID";
+                email.placeholder = "Email or Student ID";
+                email.name = "email";
+                password.name = "password";
+
+                forgotLink.href = "forgot_password.html";
+
+            }
+
+            /* Clear any previous error messages */
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+        }
+
+        function goSignUp() {
+
+            window.location.href = (currentRole === "staff")
+                ? "staffregister.html"
+                : "register.html";
+
+        }
+
+
+        /* EMAIL OR STUDENT ID VALIDATION */
         email.addEventListener("input", function () {
 
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (email.value === "") {
 
-                emailError.textContent =
-                    "Please enter your email ID";
-
+                emailError.textContent = "Please enter your email or student ID";
                 emailError.style.color = "#d8e5ff";
 
             }
+            else if (emailPattern.test(email.value) || email.value.length >= 3) {
 
-            else if (!emailPattern.test(email.value)) {
-
-                emailError.textContent =
-                    "Please enter a valid email ID";
-
-                emailError.style.color = "red";
+                emailError.textContent = "Valid input";
+                emailError.style.color = "lightgreen";
 
             }
-
             else {
 
-                emailError.textContent =
-                    "Valid email ID ✓";
-
-                emailError.style.color = "lightgreen";
+                emailError.textContent = "Please enter a valid email or student ID";
+                emailError.style.color = "red";
 
             }
 
         });
 
 
-        // Password validation
+        /* PASSWORD VALIDATION */
         password.addEventListener("input", function () {
 
             if (password.value === "") {
 
-                passwordError.textContent =
-                    "Please enter your password";
-
+                passwordError.textContent = "Please enter your password";
                 passwordError.style.color = "#d8e5ff";
 
             }
-
             else if (password.value.length < 6) {
 
-                passwordError.textContent =
-                    "Password must contain at least 6 characters";
-
+                passwordError.textContent = "Password must contain at least 6 characters";
                 passwordError.style.color = "red";
 
             }
-
             else {
 
-                passwordError.textContent =
-                    "Valid password ✓";
-
+                passwordError.textContent = "Valid password";
                 passwordError.style.color = "lightgreen";
 
             }
@@ -228,89 +358,182 @@
         });
 
 
-        // Sign In validation
+        /* FORM SUBMISSION */
         loginForm.addEventListener("submit", function (event) {
 
             event.preventDefault();
 
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
             let valid = true;
 
 
-            // Check email
-            if (!emailPattern.test(email.value)) {
+            /* Check email or student ID */
+            if (email.value === "" || email.value.length < 3) {
 
-                emailError.textContent =
-                    "Please enter a valid email ID";
-
+                emailError.textContent = "Please enter your email or student ID";
                 emailError.style.color = "red";
-
                 valid = false;
 
             }
 
 
-            // Check password
-            if (password.value.length < 6) {
+            /* Check password */
+            if (password.value === "" || password.value.length < 6) {
 
-                passwordError.textContent =
-                    "Password must contain at least 6 characters";
-
+                passwordError.textContent = "Password must contain at least 6 characters";
                 passwordError.style.color = "red";
-
                 valid = false;
 
             }
 
 
+            /* If valid, submit to PHP backend */
             if (valid) {
 
-                alert("Sign In successful!");
+                const submitBtn = loginForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = "Logging in...";
+                submitBtn.disabled = true;
+
+                const formData = new FormData(loginForm);
+
+                const loginEndpoint = (currentRole === "staff")
+                    ? 'includes/login_staff.php'
+                    : 'includes/login_student.php';
+
+                fetch(loginEndpoint, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+
+                    console.log("Server response:", data);
+
+                    if (currentRole === "staff") {
+
+                        if (data.status === 'success') {
+
+                            localStorage.setItem('mtcLoggedIn', 'true');
+                            localStorage.setItem('mtcUserType', 'staff');
+                            localStorage.setItem('mtcUserName', data.name);
+                            localStorage.setItem('mtcUserEmail', data.email);
+
+                            alert("Welcome " + data.name + "! Login successful!");
+
+                            if (data.is_admin === 1) {
+                                window.location.href = 'admin_dashboard.html';
+                            } else {
+                                window.location.href = 'staff_dashboard.html';
+                            }
+
+                        } else {
+
+                            emailError.textContent = data.message;
+                            emailError.style.color = "red";
+                            passwordError.textContent = data.message;
+                            passwordError.style.color = "red";
+
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+
+                        }
+
+                    } else if (data.status === 'success') {
+
+                        /* Login successful - no OTP needed */
+                        localStorage.setItem('mtcLoggedIn', 'true');
+                        localStorage.setItem('mtcUserType', 'student');
+                        localStorage.setItem('mtcUserName', data.name);
+                        localStorage.setItem('mtcUserEmail', data.email);
+
+                        alert("Welcome " + data.name + "! Login successful!");
+                        window.location.href = 'student_dashboard.html';
+
+                    } else if (data.status === 'error') {
+
+                        /* Login failed */
+                        emailError.textContent = data.message;
+                        emailError.style.color = "red";
+                        passwordError.textContent = data.message;
+                        passwordError.style.color = "red";
+
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+
+                    }
+
+                })
+                .catch(error => {
+
+                    console.error('Error:', error);
+                    alert("An error occurred. Please try again.");
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+
+                });
 
             }
 
         });
 
 
-        // Show / hide password
-        const togglePassword =
-            document.getElementById("togglePassword");
-
+        /* SHOW / HIDE PASSWORD */
+        const togglePassword = document.getElementById("togglePassword");
 
         togglePassword.addEventListener("click", function () {
 
             if (password.type === "password") {
 
                 password.type = "text";
-
-                togglePassword.classList.remove(
-                    "fa-eye-slash"
-                );
-
-                togglePassword.classList.add(
-                    "fa-eye"
-                );
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");
 
             }
-
             else {
 
                 password.type = "password";
-
-                togglePassword.classList.remove(
-                    "fa-eye"
-                );
-
-                togglePassword.classList.add(
-                    "fa-eye-slash"
-                );
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");
 
             }
 
         });
+
+
+        /* DARK / LIGHT MODE TOGGLE */
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById("themeIcon");
+            const text = document.getElementById("themeText");
+
+            if (body.classList.contains("light-mode")) {
+                body.classList.remove("light-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+            } else {
+                body.classList.add("light-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+            }
+        }
+
+        /* Load saved theme */
+        (function () {
+            const savedTheme = localStorage.getItem("mtcTheme");
+            const icon = document.getElementById("themeIcon");
+            const text = document.getElementById("themeText");
+
+            if (savedTheme === "light") {
+                document.body.classList.add("light-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+            }
+        })();
 
     </script>
 

@@ -8,6 +8,12 @@
 
     <title>Mother Theresa Degree College - Previous Year Question Papers</title>
 
+    <meta name="description" content="Browse and download previous year question papers, check exam results, and explore resources from Mother Theresa Degree College.">
+    <meta property="og:title" content="Mother Theresa Degree College | Student Portal">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Question papers, exam results, and college resources in one place.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
     <!-- ================= GOOGLE FONT ================= -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -167,6 +173,17 @@
             background: #e0aa00;
         }
 
+        /* Upload Button Styles */
+        .upload-btn {
+            background: #28a745 !important;
+            color: white !important;
+            transition: 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: #218838 !important;
+        }
+
 
         /* ================= MARQUEE ================= */
 
@@ -283,7 +300,7 @@
 
         .search-form {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 12px;
         }
 
@@ -834,12 +851,174 @@
 
         }
 
+    /* ================= THEME TOGGLE ================= */
+
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 5100;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #062b63;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+
+        /* ================= DARK MODE ================= */
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode header {
+            background: #1e293b;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .college-name h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .college-name p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode nav a {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode nav a:hover {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .search-box {
+            background: #1e293b;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .search-box h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .search-form select {
+            background: #0f172a;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .section-title h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .section-title p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .card,
+        body.dark-mode .feature {
+            background: #1e293b;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+        }
+
+        body.dark-mode .card h3,
+        body.dark-mode .feature h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card p,
+        body.dark-mode .feature p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .papers {
+            background: #0f172a;
+        }
+
+        body.dark-mode .paper {
+            background: #1e293b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+
+        body.dark-mode .paper h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .paper p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .about-content h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .about-content p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .login-modal-box {
+            background: #1e293b;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+        }
+
+        body.dark-mode .login-modal-box h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .login-modal-box p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .modal-close {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .modal-close:hover {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0;
+            box-shadow: none;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
     </style>
 
 </head>
 
 
 <body>
+
+    <!-- DARK / LIGHT MODE TOGGLE -->
+
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+        <span id="themeText">Light</span>
+    </button>
 
 
     <!-- ==================================================
@@ -973,6 +1152,14 @@
 
         </div>
 
+        <!-- LOGGED IN USER INFO -->
+        <div id="topBarUser" style="display:none;">
+            <span>
+                <i class="fa-solid fa-user"></i>
+                <span id="topBarUserName"></span>
+            </span>
+        </div>
+
     </div>
 
 
@@ -1024,6 +1211,10 @@
                 Courses
             </a>
 
+            <a href="about.html">
+                About & FAQ
+            </a>
+
 
             <a href="contact.html">
                 Contact
@@ -1033,32 +1224,46 @@
 
             <!-- LOGIN OPTIONS -->
 
-            <div class="login-options">
-
+            <div class="login-options" id="loginOptions">
 
                 <!-- STUDENT LOGIN -->
-
-                <a href="form.html"
-                   class="student-login">
-
+                <a href="form.html" class="student-login">
                     <i class="fa-solid fa-user-graduate"></i>
-
                     Student Login
-
                 </a>
-
 
                 <!-- STAFF LOGIN -->
-
-                <a href="stafflogin.html"
-                   class="staff-login">
-
+                <a href="stafflogin.html" class="staff-login">
                     <i class="fa-solid fa-chalkboard-user"></i>
-
                     Staff Login
-
                 </a>
 
+            </div>
+
+
+            <!-- WELCOME MESSAGE (shown when logged in) -->
+            <div class="welcome-user" id="welcomeUser" style="display:none; align-items:center; gap:12px;">
+                <span style="font-size:14px; color:#333;">
+                    <i class="fa-solid fa-user-circle" style="color:#0b4ea2; font-size:18px;"></i>
+                    Welcome, <strong id="loggedUserName"></strong>
+                </span>
+
+                <!-- UPLOAD BUTTON (Staff Only) -->
+                <a href="upload_documents.html" id="uploadBtn" class="upload-btn" style="display:none; text-decoration:none; padding:8px 14px; border-radius:5px; font-size:12px; font-weight:600;">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    Upload Docs
+                </a>
+
+                <!-- DASHBOARD BUTTON (Student Only) -->
+                <a href="student_dashboard.html" id="dashboardBtn" class="upload-btn" style="display:none; text-decoration:none; padding:8px 14px; border-radius:5px; font-size:12px; font-weight:600;">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    Dashboard
+                </a>
+
+                <a href="#" onclick="logoutUser()" style="text-decoration:none; padding:8px 14px; background:#ff4444; color:white; border-radius:5px; font-size:12px; font-weight:600;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
             </div>
 
         </nav>
@@ -1159,6 +1364,16 @@
                 </a>
 
 
+                <a href="about.html"
+                   class="secondary-btn">
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                    About & FAQ
+
+                </a>
+
+
             </div>
 
         </div>
@@ -1187,7 +1402,8 @@
 
 
             <form class="search-form"
-                  action="#papers">
+                  id="searchForm"
+                  onsubmit="return searchPapers(event);">
 
 
                 <!-- COURSE -->
@@ -1285,6 +1501,15 @@
                     </option>
 
                 </select>
+
+
+                <!-- KEYWORD / SUBJECT -->
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Subject / Paper title..."
+                    style="padding:13px; border:1px solid #ddd; border-radius:6px; outline:none; font-size:14px;"
+                >
 
 
                 <!-- SEARCH BUTTON -->
@@ -1434,194 +1659,16 @@
 
 
 
-        <div class="paper-grid">
+        <div class="paper-grid" id="papersGrid">
 
+            <!-- Papers are loaded from the database via JavaScript -->
 
-            <!-- ==================================================
-                 PAPER 1
-            ================================================== -->
+        </div>
 
-            <div class="paper">
-
-
-                <div class="paper-icon">
-
-                    <i class="fa-solid fa-file-pdf"></i>
-
-                </div>
-
-
-                <h3>
-                    Database Management Systems
-                </h3>
-
-
-                <p>
-                    B.Sc Computer Science
-                    • Semester 4
-                    • 2025
-                </p>
-
-
-                <div class="paper-buttons">
-
-
-                    <!-- VIEW -->
-
-                    <a href="papers/dbms-sem4-2025.pdf"
-                       class="paper-btn"
-                       onclick="return requireLogin(event, 'view', this.href);">
-
-                        <i class="fa-solid fa-eye"></i>
-
-                        View
-
-                    </a>
-
-
-                    <!-- DOWNLOAD -->
-
-                    <a href="papers/dbms-sem4-2025.pdf"
-                       class="paper-btn"
-                       download
-                       onclick="return requireLogin(event, 'download', this.href);">
-
-                        <i class="fa-solid fa-download"></i>
-
-                        Download
-
-                    </a>
-
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ==================================================
-                 PAPER 2
-            ================================================== -->
-
-            <div class="paper">
-
-
-                <div class="paper-icon">
-
-                    <i class="fa-solid fa-file-pdf"></i>
-
-                </div>
-
-
-                <h3>
-                    Financial Accounting
-                </h3>
-
-
-                <p>
-                    B.Com
-                    • Semester 4
-                    • 2025
-                </p>
-
-
-                <div class="paper-buttons">
-
-
-                    <!-- VIEW -->
-
-                    <a href="papers/financial-accounting-sem4-2025.pdf"
-                       class="paper-btn"
-                       onclick="return requireLogin(event, 'view', this.href);">
-
-                        <i class="fa-solid fa-eye"></i>
-
-                        View
-
-                    </a>
-
-
-                    <!-- DOWNLOAD -->
-
-                    <a href="papers/financial-accounting-sem4-2025.pdf"
-                       class="paper-btn"
-                       download
-                       onclick="return requireLogin(event, 'download', this.href);">
-
-                        <i class="fa-solid fa-download"></i>
-
-                        Download
-
-                    </a>
-
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ==================================================
-                 PAPER 3
-            ================================================== -->
-
-            <div class="paper">
-
-
-                <div class="paper-icon">
-
-                    <i class="fa-solid fa-file-pdf"></i>
-
-                </div>
-
-
-                <h3>
-                    Programming in C
-                </h3>
-
-
-                <p>
-                    BCA
-                    • Semester 2
-                    • 2025
-                </p>
-
-
-                <div class="paper-buttons">
-
-
-                    <!-- VIEW -->
-
-                    <a href="papers/programming-c-sem2-2025.pdf"
-                       class="paper-btn"
-                       onclick="return requireLogin(event, 'view', this.href);">
-
-                        <i class="fa-solid fa-eye"></i>
-
-                        View
-
-                    </a>
-
-
-                    <!-- DOWNLOAD -->
-
-                    <a href="papers/programming-c-sem2-2025.pdf"
-                       class="paper-btn"
-                       download
-                       onclick="return requireLogin(event, 'download', this.href);">
-
-                        <i class="fa-solid fa-download"></i>
-
-                        Download
-
-                    </a>
-
-
-                </div>
-
-            </div>
-
-
+        <div style="text-align:center; margin-top:25px;">
+            <button id="loadMoreBtn" onclick="loadMorePapers()" style="display:none; padding:12px 28px; background:#0b4ea2; color:white; border:none; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer;">
+                <i class="fa-solid fa-angles-down"></i> Load More Papers
+            </button>
         </div>
 
     </section>
@@ -1906,6 +1953,243 @@
 
         /*
         =====================================================
+        SHOW LOGGED-IN USER NAME
+        =====================================================
+        */
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var isLoggedIn = localStorage.getItem('mtcLoggedIn');
+            var userName = localStorage.getItem('mtcUserName');
+            var userType = localStorage.getItem('mtcUserType');
+
+            if (isLoggedIn === 'true' && userName) {
+
+                // Show welcome message in header
+                var welcomeDiv = document.getElementById('welcomeUser');
+                var loginOptions = document.getElementById('loginOptions');
+                var nameSpan = document.getElementById('loggedUserName');
+                var uploadBtn = document.getElementById('uploadBtn');
+                var dashboardBtn = document.getElementById('dashboardBtn');
+
+                if (welcomeDiv) {
+                    welcomeDiv.style.display = 'flex';
+                    nameSpan.textContent = userName;
+                }
+
+                // Hide login buttons
+                if (loginOptions) {
+                    loginOptions.style.display = 'none';
+                }
+
+                // Show upload button only for staff
+                if (uploadBtn && userType === 'staff') {
+                    uploadBtn.style.display = 'inline-block';
+                }
+
+                // Show dashboard button only for student
+                if (dashboardBtn && userType === 'student') {
+                    dashboardBtn.style.display = 'inline-block';
+                }
+
+                // Show name in top bar
+                var topBarUser = document.getElementById('topBarUser');
+                var topBarUserName = document.getElementById('topBarUserName');
+
+                if (topBarUser) {
+                    topBarUser.style.display = 'block';
+                    topBarUserName.textContent = userName + ' (' + userType + ')';
+                }
+
+            }
+
+        });
+
+
+        /*
+        =====================================================
+        LOAD QUESTION PAPERS FROM THE DATABASE
+        =====================================================
+        */
+
+        var courseNames = {
+            bcom: 'B.Com',
+            bsc: 'B.Sc',
+            bca: 'BCA',
+            bba: 'BBA'
+        };
+
+        function courseDisplayName(code) {
+            return courseNames[code] || (code ? code.toUpperCase() : '');
+        }
+
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        var paperPage = 1;
+        var paperTotalPages = 1;
+        var paperFilters = null;
+
+        function loadPapers(filters, append) {
+            paperFilters = filters || null;
+            var grid = document.getElementById('papersGrid');
+
+            if (!append) {
+                paperPage = 1;
+                grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#888; padding:20px;">' +
+                    '<i class="fa-solid fa-spinner fa-spin"></i> Loading question papers...</p>';
+            }
+
+            var query = 'includes/get_papers.php?limit=6&page=' + paperPage;
+            var parts = [];
+            if (filters) {
+                if (filters.course) parts.push('course=' + encodeURIComponent(filters.course));
+                if (filters.semester) parts.push('semester=' + encodeURIComponent(filters.semester));
+                if (filters.year) parts.push('year=' + encodeURIComponent(filters.year));
+                if (filters.q) parts.push('q=' + encodeURIComponent(filters.q));
+            }
+            if (parts.length > 0) {
+                query += '&' + parts.join('&');
+            }
+
+            fetch(query)
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.success && data.papers) {
+                    paperTotalPages = data.total_pages || 1;
+                    renderPapers(data.papers, filters, append);
+                } else if (!append) {
+                    grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#888; padding:20px;">No question papers found.</p>';
+                }
+
+                var btn = document.getElementById('loadMoreBtn');
+                if (paperPage < paperTotalPages) {
+                    btn.style.display = 'inline-block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            })
+            .catch(function(error) {
+                console.error('Error loading papers:', error);
+                if (!append) {
+                    grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#d33; padding:20px;">Failed to load question papers.</p>';
+                }
+            });
+        }
+
+        function loadMorePapers() {
+            paperPage++;
+            loadPapers(paperFilters, true);
+        }
+
+        function renderPapers(papers, filters, append) {
+            var grid = document.getElementById('papersGrid');
+
+            if (papers.length === 0) {
+                if (!append) {
+                    grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#888; padding:30px;">' +
+                        '<i class="fa-solid fa-folder-open"></i> No question papers found matching your search.</p>';
+                }
+                return;
+            }
+
+            var html = '';
+            papers.forEach(function(paper) {
+                var semLabel = paper.semester;
+                var suffix = (semLabel === '1' ? 'st' : semLabel === '2' ? 'nd' : semLabel === '3' ? 'rd' : 'th');
+                if (paper.semester <= 6) {
+                    semLabel = paper.semester + suffix;
+                }
+
+                html +=
+                    '<div class="paper">' +
+                        '<div class="paper-icon"><i class="fa-solid fa-file-pdf"></i></div>' +
+                        '<h3>' + esc(paper.title) + '</h3>' +
+                        '<p>' + esc(courseDisplayName(paper.course)) +
+                        ' &bull; Semester ' + esc(semLabel) +
+                        ' &bull; ' + esc(paper.year) + '</p>' +
+                        '<div class="paper-buttons">' +
+                            '<a href="' + paper.file_path + '" class="paper-btn" onclick="return requireLogin(event, \'view\', this.href);">' +
+                                '<i class="fa-solid fa-eye"></i> View</a>' +
+                            '<a href="' + paper.file_path + '" class="paper-btn" download onclick="return requireLogin(event, \'download\', this.href);">' +
+                                '<i class="fa-solid fa-download"></i> Download</a>' +
+                        '</div>' +
+                    '</div>';
+            });
+
+            if (append) {
+                grid.insertAdjacentHTML('beforeend', html);
+            } else {
+                grid.innerHTML = html;
+            }
+        }
+
+        function searchPapers(event) {
+            event.preventDefault();
+            if (event.target) {
+                event.preventDefault();
+            }
+
+            var filters = {
+                course: document.getElementById('searchForm').elements['course'].value,
+                semester: document.getElementById('searchForm').elements['semester'].value,
+                year: document.getElementById('searchForm').elements['year'].value,
+                q: document.getElementById('searchForm').elements['q'].value
+            };
+
+            document.getElementById('papers').scrollIntoView({ behavior: 'smooth' });
+            loadPapers(filters);
+            return false;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPapers(null);
+        });
+
+
+        /*
+        =====================================================
+        LOGOUT FUNCTION
+        =====================================================
+        */
+
+        function logoutUser() {
+
+            if (confirm('Are you sure you want to logout?')) {
+
+                // Clear login state from localStorage
+                localStorage.removeItem('mtcLoggedIn');
+                localStorage.removeItem('mtcUserType');
+                localStorage.removeItem('mtcUserName');
+                localStorage.removeItem('mtcUserEmail');
+                localStorage.removeItem('mtcIsAdmin');
+
+                // Show login buttons, hide welcome
+                var welcomeDiv = document.getElementById('welcomeUser');
+                var loginOptions = document.getElementById('loginOptions');
+
+                if (welcomeDiv) {
+                    welcomeDiv.style.display = 'none';
+                }
+
+                if (loginOptions) {
+                    loginOptions.style.display = 'flex';
+                }
+
+                fetch('includes/logout.php', { method: 'POST', keepalive: true });
+                alert('Logged out successfully!');
+                window.location.href = 'openwebsite.html';
+
+            }
+
+        }
+
+
+        /*
+        =====================================================
         LOGIN CHECK FOR VIEW AND DOWNLOAD
         =====================================================
         */
@@ -2084,6 +2368,64 @@
 
             }
         );
+
+
+        /*
+        =====================================================
+        DARK / LIGHT MODE TOGGLE
+        =====================================================
+        */
+
+        function toggleTheme() {
+
+            var body = document.body;
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (body.classList.contains("dark-mode")) {
+
+                body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+
+            } else {
+
+                body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+
+            }
+
+        }
+
+
+        (function () {
+
+            var savedTheme = localStorage.getItem("mtcTheme");
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (savedTheme === "dark") {
+
+                document.body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+
+            } else if (savedTheme === "light") {
+
+                document.body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+
+            }
+
+        })();
 
 
     </script>

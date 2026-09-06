@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Theresa Degree College - Staff Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a5276 0%, #2e86c1 100%);
+            color: white;
+            padding: 20px 0;
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar:hover {
+            width: 260px;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 10px 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            transition: 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header .logo {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header h3 {
+            opacity: 1;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header p {
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #f39c12;
+        }
+
+        .sidebar-menu a i {
+            margin-right: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-menu a span {
+            opacity: 1;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            background: rgba(255,68,68,0.3);
+            border-radius: 6px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .sidebar-footer a:hover {
+            background: rgba(255,68,68,0.5);
+        }
+
+        .sidebar-footer a i {
+            margin-right: 10px;
+        }
+
+        .sidebar-footer a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-footer a span {
+            opacity: 1;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 70px;
+            padding: 20px 30px;
+            transition: margin-left 0.3s;
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: 260px;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .top-bar h2 {
+            color: #1a5276;
+            font-size: 22px;
+        }
+
+        .top-bar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .top-bar .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: #1a5276;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .top-bar .user-details span {
+            display: block;
+        }
+
+        .top-bar .user-details .name {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .top-bar .user-details .role {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* STATS CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-card .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .stat-card .icon.blue { background: #e3f2fd; color: #1a5276; }
+        .stat-card .icon.green { background: #e8f5e9; color: #28a745; }
+        .stat-card .icon.orange { background: #fff3e0; color: #ff9800; }
+        .stat-card .icon.purple { background: #f3e5f5; color: #9c27b0; }
+
+        .stat-card .info h3 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        .stat-card .info p {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* CONTENT GRID */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 25px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .card-body {
+            padding: 20px 25px;
+        }
+
+        /* DOCUMENT ITEM */
+        .doc-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+
+        .doc-status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .doc-status.approved { background: #d4edda; color: #155724; }
+        .doc-status.pending { background: #fff3cd; color: #856404; }
+        .doc-status.rejected { background: #f8d7da; color: #721c24; }
+        body.dark-mode .doc-status.approved { background: #155724; color: #d4edda; }
+        body.dark-mode .doc-status.pending { background: #856404; color: #fff3cd; }
+        body.dark-mode .doc-status.rejected { background: #721c24; color: #f8d7da; }
+
+        .doc-icon {
+            width: 50px;
+            height: 50px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 22px;
+            color: #1a5276;
+        }
+
+        .doc-info {
+            flex: 1;
+        }
+
+        .doc-info h4 {
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .doc-info p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .doc-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .doc-actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .btn-view {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* QUICK LINKS */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .quick-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .quick-link:hover {
+            background: #e3f2fd;
+            transform: translateY(-3px);
+        }
+
+        .quick-link i {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1a5276;
+        }
+
+        .quick-link span {
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* NOTIFICATIONS */
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+
+        .notification-icon.info { background: #e3f2fd; color: #1a5276; }
+        .notification-icon.success { background: #e8f5e9; color: #28a745; }
+        .notification-icon.warning { background: #fff3e0; color: #ff9800; }
+
+        .notification-text {
+            flex: 1;
+        }
+
+        .notification-text p {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .notification-text small {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+        }
+
+        .empty-state i {
+            font-size: 40px;
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .sidebar-header h3,
+            .sidebar-header p,
+            .sidebar-menu a span,
+            .sidebar-footer a span {
+                opacity: 0;
+            }
+            .sidebar:hover .sidebar-header h3,
+            .sidebar:hover .sidebar-header p,
+            .sidebar:hover .sidebar-menu a span,
+            .sidebar:hover .sidebar-footer a span {
+                opacity: 1;
+            }
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 2000;
+            background: rgba(26, 82, 118, 0.1);
+            border: 1px solid rgba(26, 82, 118, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(26, 82, 118, 0.2);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .top-bar h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar p {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .top-bar .user-details .name {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar .user-details .role {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .stat-card {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .stat-card .info h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .stat-card .info p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .card {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .card-header {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .card-header h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card-header a {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .doc-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .doc-info h4 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .doc-info p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .notification-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .notification-text p {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notification-text small {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .quick-link {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .quick-link:hover {
+            background: #334155;
+        }
+
+        body.dark-mode #profileName,
+        body.dark-mode #profileEmail {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .empty-state {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+        <span id="themeText">Light</span>
+    </button>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">M</div>
+            <h3>Mother Theresa</h3>
+            <p>Degree College</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="staff_dashboard.html" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="upload_documents.html">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Upload Documents</span>
+            </a>
+            <a href="manage_papers.html">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Manage Papers</span>
+            </a>
+            <a href="openwebsite.html">
+                <i class="fa-solid fa-globe"></i>
+                <span>View Portal</span>
+            </a>
+            <a href="admin_dashboard.html" id="adminLink" style="display:none;">
+                <i class="fa-solid fa-user-check"></i>
+                <span>Approve Staff</span>
+            </a>
+            <a href="contact.html">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="#" onclick="logoutStaff()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div>
+                <h2>Staff Dashboard</h2>
+                <p style="font-size:13px; color:#1a5276; font-weight:500;">Mother Theresa Degree College</p>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="name" id="staffName">Staff</span>
+                    <span class="role">Staff Member</span>
+                </div>
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon blue">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <div class="info">
+                    <h3 id="totalDocs">0</h3>
+                    <p>Documents Uploaded</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon green">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="info">
+                    <h3 id="totalStudents">0</h3>
+                    <p>Students</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon orange">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div class="info">
+                    <h3 id="totalPapers">0</h3>
+                    <p>Question Papers</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon purple">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+                <div class="info">
+                    <h3>5</h3>
+                    <p>Departments</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT GRID -->
+        <div class="content-grid">
+            <!-- LEFT COLUMN -->
+            <div>
+                <!-- RECENT DOCUMENTS -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-folder-open"></i> My Documents</h3>
+                        <a href="upload_documents.html" style="color:#1a5276; text-decoration:none; font-size:13px;">Upload New</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="documentsContainer">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-folder-open"></i>
+                                <p>No documents uploaded yet</p>
+                                <a href="upload_documents.html" style="display:inline-block; margin-top:10px; padding:8px 20px; background:#1a5276; color:white; text-decoration:none; border-radius:5px; font-size:12px; font-weight:600;">
+                                    <i class="fa-solid fa-upload"></i> Upload Document
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ACTIVITY -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-item">
+                            <div class="notification-icon info"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <div class="notification-text">
+                                <p>You logged in to the system</p>
+                                <small>Just now</small>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon success"><i class="fa-solid fa-check"></i></div>
+                            <div class="notification-text">
+                                <p>Staff account verified</p>
+                                <small>Account active</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div>
+                <!-- QUICK LINKS -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-bolt"></i> Quick Links</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-links">
+                            <a href="upload_documents.html" class="quick-link">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>Upload Docs</span>
+                            </a>
+                            <a href="manage_papers.html" class="quick-link">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>Upload Papers</span>
+                            </a>
+                            <a href="openwebsite.html" class="quick-link">
+                                <i class="fa-solid fa-globe"></i>
+                                <span>View Portal</span>
+                            </a>
+                            <a href="contact.html" class="quick-link">
+                                <i class="fa-solid fa-headset"></i>
+                                <span>Contact</span>
+                            </a>
+                            <a href="#" class="quick-link" onclick="logoutStaff()">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STAFF PROFILE -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-id-card"></i> My Profile</h3>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <div style="width:80px; height:80px; background:#1a5276; border-radius:50%; margin:0 auto 15px; display:flex; align-items:center; justify-content:center; color:white; font-size:32px;">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <h4 id="profileName" style="color:#333; margin-bottom:5px;">Staff Name</h4>
+                        <p id="profileEmail" style="color:#888; font-size:13px; margin-bottom:15px;">staff@mtc.edu</p>
+                        <div style="text-align:left; font-size:13px;">
+                            <p style="margin-bottom:8px;"><strong>Role:</strong> Staff Member</p>
+                            <p style="margin-bottom:8px;"><strong>Status:</strong> <span style="color:#28a745;">Active</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHANGE PASSWORD -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-key"></i> Change Password</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="changePwdForm" onsubmit="return changeStaffPassword(event);" style="display:grid; gap:12px;">
+                            <input type="password" id="currentPassword" placeholder="Current password" style="padding:10px; border:1px solid #ddd; border-radius:5px; font-size:13px;">
+                            <input type="password" id="newPassword" placeholder="New password (min 6 chars)" style="padding:10px; border:1px solid #ddd; border-radius:5px; font-size:13px;">
+                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password" style="padding:10px; border:1px solid #ddd; border-radius:5px; font-size:13px;">
+                            <button type="submit" style="padding:10px; background:#1a5276; color:white; border:none; border-radius:5px; font-weight:600; cursor:pointer;">
+                                <i class="fa-solid fa-key"></i> Change Password
+                            </button>
+                        </form>
+                        <small id="pwdMessage" style="display:block; margin-top:10px; text-align:center;"></small>
+                    </div>
+                </div>
+
+                <!-- DEPARTMENTS -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-building"></i> Departments</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-item">
+                            <div class="notification-icon info"><i class="fa-solid fa-laptop-code"></i></div>
+                            <div class="notification-text">
+                                <p>Computer Science</p>
+                                <small>5 Staff Members</small>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon success"><i class="fa-solid fa-chart-line"></i></div>
+                            <div class="notification-text">
+                                <p>Data Science</p>
+                                <small>3 Staff Members</small>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon warning"><i class="fa-solid fa-calculator"></i></div>
+                            <div class="notification-text">
+                                <p>Commerce</p>
+                                <small>4 Staff Members</small>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon info"><i class="fa-solid fa-briefcase"></i></div>
+                            <div class="notification-text">
+                                <p>Management</p>
+                                <small>3 Staff Members</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loggedIn = localStorage.getItem('mtcLoggedIn');
+            var userType = localStorage.getItem('mtcUserType');
+            var userName = localStorage.getItem('mtcUserName');
+            var userEmail = localStorage.getItem('mtcUserEmail');
+
+            if (!loggedIn || userType !== 'staff') {
+                alert('Please login as staff first');
+                window.location.href = 'stafflogin.html';
+                return;
+            }
+
+            document.getElementById('staffName').textContent = userName || 'Staff';
+            document.getElementById('profileName').textContent = userName || 'Staff';
+            document.getElementById('profileEmail').textContent = userEmail || 'staff@mtc.edu';
+
+            var isAdmin = localStorage.getItem('mtcIsAdmin');
+            var adminLink = document.getElementById('adminLink');
+            if (adminLink && isAdmin === 'true') {
+                adminLink.style.display = 'flex';
+            }
+
+            loadDocuments();
+            loadStudentCount();
+            loadPapersCount();
+        });
+
+        function loadDocuments() {
+            fetch('includes/upload_documents.php?action=list')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.documents) {
+                    document.getElementById('totalDocs').textContent = data.documents.length;
+                    displayDocuments(data.documents);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function displayDocuments(documents) {
+            var container = document.getElementById('documentsContainer');
+
+            if (documents.length === 0) {
+                container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-folder-open"></i><p>No documents uploaded yet</p><a href="upload_documents.html" style="display:inline-block; margin-top:10px; padding:8px 20px; background:#1a5276; color:white; text-decoration:none; border-radius:5px; font-size:12px; font-weight:600;"><i class="fa-solid fa-upload"></i> Upload Document</a></div>';
+                return;
+            }
+
+            var html = '';
+            documents.slice(0, 5).forEach(function(doc) {
+                var sizeMB = (doc.file_size / (1024 * 1024)).toFixed(2);
+                var date = new Date(doc.uploaded_at).toLocaleDateString('en-IN');
+
+                html += '<div class="doc-item">' +
+                    '<div class="doc-icon"><i class="fa-solid fa-file"></i></div>' +
+                    '<div class="doc-info">' +
+                    '<h4>' + esc(doc.document_name) + '</h4>' +
+                    '<p>' + esc(doc.document_type) + ' | ' + sizeMB + ' MB | ' + date + '</p>' +
+                    '<p style="margin-top:3px;"><span class="doc-status ' + esc(doc.status) + '">' + esc(doc.status) + '</span></p>' +
+                    '</div>' +
+                    '<div class="doc-actions">' +
+                    '<button class="btn-view" onclick="window.open(\'' + esc(doc.file_path) + '\', \'_blank\')"><i class="fa-solid fa-eye"></i></button>' +
+                    '</div>' +
+                    '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        function loadStudentCount() {
+            fetch('includes/upload_documents.php?action=student_count')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('totalStudents').textContent = data.count || 0;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function loadPapersCount() {
+            fetch('includes/get_papers.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('totalPapers').textContent = data.count || 0;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function changeStaffPassword(event) {
+            event.preventDefault();
+
+            var current = document.getElementById('currentPassword').value;
+            var newPwd = document.getElementById('newPassword').value;
+            var confirmNew = document.getElementById('confirmNewPassword').value;
+            var msg = document.getElementById('pwdMessage');
+
+            if (!current || newPwd.length < 6) {
+                msg.textContent = 'Enter current password and a new password (min 6 chars)';
+                msg.style.color = 'red';
+                return false;
+            }
+
+            if (newPwd !== confirmNew) {
+                msg.textContent = 'New passwords do not match';
+                msg.style.color = 'red';
+                return false;
+            }
+
+            var btn = document.querySelector('#changePwdForm button[type="submit"]');
+            btn.disabled = true;
+
+            fetch('includes/change_password.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ current_password: current, new_password: newPwd })
+            })
+            .then(response => response.json())
+            .then(data => {
+                btn.disabled = false;
+                msg.textContent = data.message;
+                msg.style.color = data.success ? 'green' : 'red';
+
+                if (data.success) {
+                    document.getElementById('currentPassword').value = '';
+                    document.getElementById('newPassword').value = '';
+                    document.getElementById('confirmNewPassword').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                btn.disabled = false;
+                msg.textContent = 'Error changing password. Please try again.';
+                msg.style.color = 'red';
+            });
+
+            return false;
+        }
+
+        function logoutStaff() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('mtcLoggedIn');
+                localStorage.removeItem('mtcUserType');
+                localStorage.removeItem('mtcUserName');
+                localStorage.removeItem('mtcUserEmail');
+                localStorage.removeItem('mtcIsAdmin');
+                fetch('includes/logout.php', { method: 'POST', keepalive: true });
+                alert('Logged out successfully!');
+                window.location.href = 'stafflogin.html';
+            }
+        }
+
+        /* DARK / LIGHT MODE TOGGLE */
+        function toggleTheme() {
+            var body = document.body;
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+            } else {
+                body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+            }
+        }
+
+        /* Load saved theme */
+        (function () {
+            var savedTheme = localStorage.getItem("mtcTheme");
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+            } else if (savedTheme === "light") {
+                document.body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+            }
+        })();
+    </script>
+</body>
+</html>

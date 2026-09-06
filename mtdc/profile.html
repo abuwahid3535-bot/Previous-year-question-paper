@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Theresa Degree College - My Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 100vh;
+            background: linear-gradient(180deg, #062b63 0%, #0b4ea2 100%);
+            color: white;
+            padding: 20px 0;
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar:hover {
+            width: 260px;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 10px 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0b4ea2;
+            transition: 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header .logo {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header h3 {
+            opacity: 1;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header p {
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #ffca28;
+        }
+
+        .sidebar-menu a i {
+            margin-right: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-menu a span {
+            opacity: 1;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            background: rgba(255,68,68,0.3);
+            border-radius: 6px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .sidebar-footer a:hover {
+            background: rgba(255,68,68,0.5);
+        }
+
+        .sidebar-footer a i {
+            margin-right: 10px;
+        }
+
+        .sidebar-footer a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-footer a span {
+            opacity: 1;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 70px;
+            padding: 20px 30px;
+            transition: margin-left 0.3s;
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: 260px;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .top-bar h2 {
+            color: #062b63;
+            font-size: 22px;
+        }
+
+        .top-bar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* PROFILE CONTAINER */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 25px;
+        }
+
+        /* PROFILE CARD */
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #0b4ea2, #1e88e5);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-pic-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+            background: white;
+        }
+
+        .profile-pic-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #0b4ea2;
+        }
+
+        .upload-pic-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 35px;
+            height: 35px;
+            background: #28a745;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .upload-pic-btn:hover {
+            background: #218838;
+        }
+
+        .profile-header h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .profile-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .profile-body {
+            padding: 25px;
+        }
+
+        .profile-item {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-item .label {
+            width: 140px;
+            font-weight: 600;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .profile-item .value {
+            flex: 1;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* EDIT FORM */
+        .edit-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .edit-header {
+            background: #f8f9fa;
+            padding: 18px 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .edit-header h3 {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .edit-body {
+            padding: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0b4ea2;
+            box-shadow: 0 0 0 3px rgba(11, 78, 162, 0.1);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #0b4ea2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #093d82;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: #28a745;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: #333;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-body {
+            text-align: center;
+        }
+
+        .preview-container {
+            margin: 20px 0;
+        }
+
+        .preview-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ddd;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .sidebar-header h3,
+            .sidebar-header p,
+            .sidebar-menu a span,
+            .sidebar-footer a span {
+                opacity: 0;
+            }
+            .sidebar:hover .sidebar-header h3,
+            .sidebar:hover .sidebar-header p,
+            .sidebar:hover .sidebar-menu a span,
+            .sidebar:hover .sidebar-footer a span {
+                opacity: 1;
+            }
+            .main-content {
+                margin-left: 70px;
+            }
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 2100;
+            background: rgba(11, 78, 162, 0.1);
+            border: 1px solid rgba(11, 78, 162, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0b4ea2;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(11, 78, 162, 0.2);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .top-bar h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar .user-info a {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .profile-card,
+        body.dark-mode .edit-card,
+        body.dark-mode .modal-content {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .profile-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .profile-item .label {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .profile-item .value {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .edit-header {
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .edit-header h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #0f172a;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus {
+            border-color: #0b4ea2;
+        }
+
+        body.dark-mode .modal-header h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .modal-close {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .profile-pic {
+            background: #0f172a;
+            border-color: #334155;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+        <span id="themeText">Light</span>
+    </button>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">M</div>
+            <h3>Mother Theresa</h3>
+            <p>Degree College</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="student_dashboard.html">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="openwebsite.html">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Question Papers</span>
+            </a>
+            <a href="course.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Courses</span>
+            </a>
+            <a href="profile.html" class="active">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+            <a href="contact.html">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="#" onclick="logoutStudent()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <h2>My Profile</h2>
+            <div class="user-info">
+                <a href="student_dashboard.html" style="color:#0b4ea2; text-decoration:none; font-size:14px;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- PROFILE CONTAINER -->
+        <div class="profile-container">
+            <!-- LEFT: PROFILE CARD -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-pic-container">
+                        <div class="profile-pic-placeholder" id="profilePicDisplay">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <div class="upload-pic-btn" onclick="openUploadModal()">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                    <h3 id="profileName">Student Name</h3>
+                    <p id="profileCourse">Course - Semester</p>
+                </div>
+                <div class="profile-body">
+                    <div class="profile-item">
+                        <div class="label">Email</div>
+                        <div class="value" id="profileEmail">student@mtc.edu</div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="label">Mobile</div>
+                        <div class="value" id="profileMobile">9876543210</div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="label">Student ID</div>
+                        <div class="value" id="profileStudentId">STU001</div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="label">Department</div>
+                        <div class="value" id="profileDepartment">Computer Science</div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="label">Year/Semester</div>
+                        <div class="value" id="profileYearSem">4th Semester</div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="label">Status</div>
+                        <div class="value"><span style="color:#28a745; font-weight:600;">Active</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: EDIT FORM -->
+            <div class="edit-card">
+                <div class="edit-header">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Edit Profile</h3>
+                </div>
+                <div class="edit-body">
+                    <form id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="editName" placeholder="Enter your full name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="editEmail" placeholder="Email" readonly style="background:#f5f5f5;">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="tel" id="editMobile" placeholder="10-digit mobile number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Student ID</label>
+                                <input type="text" id="editStudentId" placeholder="Student ID" readonly style="background:#f5f5f5;">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Course</label>
+                                <select id="editCourse">
+                                    <option value="B.Com">B.Com</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="B.Sc Computer Science">B.Sc Computer Science</option>
+                                    <option value="B.Sc Data Science">B.Sc Data Science</option>
+                                    <option value="BBA">BBA</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select id="editDepartment">
+                                    <option value="Commerce">Commerce</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Data Science">Data Science</option>
+                                    <option value="Management">Management</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Year/Semester</label>
+                            <select id="editYearSem">
+                                <option value="1st Semester">1st Semester</option>
+                                <option value="2nd Semester">2nd Semester</option>
+                                <option value="3rd Semester">3rd Semester</option>
+                                <option value="4th Semester">4th Semester</option>
+                                <option value="5th Semester">5th Semester</option>
+                                <option value="6th Semester">6th Semester</option>
+                            </select>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="btn btn-primary" id="saveBtn">
+                                <i class="fa-solid fa-save"></i> Save Changes
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                <i class="fa-solid fa-rotate-left"></i> Reset
+                            </button>
+                        </div>
+                        <small id="formMessage" style="display:block; margin-top:15px;"></small>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHANGE PASSWORD CARD -->
+    <div class="container" style="padding-top:0;">
+        <div class="card edit-card">
+            <div class="edit-header">
+                <h3><i class="fa-solid fa-key"></i> Change Password</h3>
+            </div>
+            <div class="edit-body">
+                <form id="changePwdForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password" minlength="6">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password (min 6 chars)" minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" minlength="6">
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-key"></i> Change Password
+                        </button>
+                    </div>
+                    <small id="pwdMessage" style="display:block; margin-top:15px;"></small>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPLOAD PICTURE MODAL -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Upload Profile Picture</h3>
+                <button class="modal-close" onclick="closeUploadModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-container">
+                    <img id="previewImg" class="preview-img" src="" alt="Preview" style="display:none;">
+                    <div id="previewPlaceholder" class="profile-pic-placeholder" style="margin:0 auto;">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                </div>
+                <input type="file" id="profilePicInput" accept="image/*" style="display:none;">
+                <button class="btn btn-primary" onclick="document.getElementById('profilePicInput').click();">
+                    <i class="fa-solid fa-image"></i> Choose Photo
+                </button>
+                <div class="buttons" style="justify-content:center; margin-top:20px;">
+                    <button class="btn btn-success" id="uploadPicBtn" onclick="uploadProfilePic()" disabled>
+                        <i class="fa-solid fa-upload"></i> Upload
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeUploadModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var currentUser = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var loggedIn = localStorage.getItem('mtcLoggedIn');
+            var userType = localStorage.getItem('mtcUserType');
+            var userEmail = localStorage.getItem('mtcUserEmail');
+
+            if (!loggedIn || userType !== 'student') {
+                alert('Please login as student first');
+                window.location.href = 'form.html';
+                return;
+            }
+
+            loadProfile(userEmail);
+        });
+
+        function loadProfile(email) {
+            fetch('includes/get_profile.php?email=' + encodeURIComponent(email))
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    currentUser = data.profile;
+                    displayProfile(data.profile);
+                    fillEditForm(data.profile);
+                } else {
+                    alert('Error loading profile: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error loading profile');
+            });
+        }
+
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function displayProfile(profile) {
+            document.getElementById('profileName').textContent = profile.full_name || 'Student';
+            document.getElementById('profileEmail').textContent = profile.email || '';
+            document.getElementById('profileMobile').textContent = profile.mobile || 'Not provided';
+            document.getElementById('profileStudentId').textContent = profile.student_id || 'Not assigned';
+            document.getElementById('profileDepartment').textContent = profile.department || 'Not assigned';
+            document.getElementById('profileYearSem').textContent = profile.year_semester || 'Not assigned';
+            document.getElementById('profileCourse').textContent = (profile.course || '') + ' - ' + (profile.year_semester || '');
+
+            if (profile.profile_pic) {
+                document.getElementById('profilePicDisplay').innerHTML = '<img src="' + esc(profile.profile_pic) + '" class="profile-pic" alt="Profile">';
+            }
+        }
+
+        function fillEditForm(profile) {
+            document.getElementById('editName').value = profile.full_name || '';
+            document.getElementById('editEmail').value = profile.email || '';
+            document.getElementById('editMobile').value = profile.mobile || '';
+            document.getElementById('editStudentId').value = profile.student_id || '';
+            document.getElementById('editCourse').value = profile.course || 'B.Com';
+            document.getElementById('editDepartment').value = profile.department || 'Commerce';
+            document.getElementById('editYearSem').value = profile.year_semester || '1st Semester';
+        }
+
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var submitBtn = document.getElementById('saveBtn');
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            submitBtn.disabled = true;
+
+            fetch('includes/update_profile.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: document.getElementById('editEmail').value,
+                    full_name: document.getElementById('editName').value,
+                    mobile: document.getElementById('editMobile').value,
+                    course: document.getElementById('editCourse').value,
+                    department: document.getElementById('editDepartment').value,
+                    year_semester: document.getElementById('editYearSem').value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.innerHTML = '<i class="fa-solid fa-save"></i> Save Changes';
+                submitBtn.disabled = false;
+
+                var msg = document.getElementById('formMessage');
+                if (data.success) {
+                    msg.textContent = 'Profile updated successfully!';
+                    msg.style.color = '#28a745';
+                    localStorage.setItem('mtcUserName', document.getElementById('editName').value);
+                    loadProfile(document.getElementById('editEmail').value);
+                } else {
+                    msg.textContent = data.message;
+                    msg.style.color = '#dc3545';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                submitBtn.innerHTML = '<i class="fa-solid fa-save"></i> Save Changes';
+                submitBtn.disabled = false;
+                document.getElementById('formMessage').textContent = 'Error updating profile';
+                document.getElementById('formMessage').style.color = '#dc3545';
+            });
+        });
+
+        function resetForm() {
+            if (currentUser) {
+                fillEditForm(currentUser);
+            }
+            document.getElementById('formMessage').textContent = '';
+        }
+
+        /* PROFILE PICTURE UPLOAD */
+        function openUploadModal() {
+            document.getElementById('uploadModal').style.display = 'flex';
+        }
+
+        function closeUploadModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('previewImg').style.display = 'none';
+            document.getElementById('previewPlaceholder').style.display = 'flex';
+            document.getElementById('profilePicInput').value = '';
+            document.getElementById('uploadPicBtn').disabled = true;
+        }
+
+        document.getElementById('profilePicInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size must be less than 5MB');
+                    return;
+                }
+
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('previewImg').src = event.target.result;
+                    document.getElementById('previewImg').style.display = 'block';
+                    document.getElementById('previewPlaceholder').style.display = 'none';
+                    document.getElementById('uploadPicBtn').disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function uploadProfilePic() {
+            var fileInput = document.getElementById('profilePicInput');
+            var file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a photo first');
+                return;
+            }
+
+            var uploadBtn = document.getElementById('uploadPicBtn');
+            uploadBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
+            uploadBtn.disabled = true;
+
+            var formData = new FormData();
+            formData.append('profile_pic', file);
+            formData.append('email', currentUser.email);
+
+            fetch('includes/upload_profile_pic.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                uploadBtn.innerHTML = '<i class="fa-solid fa-upload"></i> Upload';
+                uploadBtn.disabled = false;
+
+                if (data.success) {
+                    alert('Profile picture uploaded successfully!');
+                    closeUploadModal();
+                    loadProfile(currentUser.email);
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                uploadBtn.innerHTML = '<i class="fa-solid fa-upload"></i> Upload';
+                uploadBtn.disabled = false;
+                alert('Error uploading picture');
+            });
+        }
+
+        /* =====================================================
+       CHANGE PASSWORD
+    ===================================================== */
+        document.getElementById('changePwdForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var current = document.getElementById('currentPassword').value;
+            var newPwd = document.getElementById('newPassword').value;
+            var confirmNew = document.getElementById('confirmNewPassword').value;
+            var msg = document.getElementById('pwdMessage');
+
+            if (!current || newPwd.length < 6) {
+                msg.textContent = 'Please enter current password and a new password of at least 6 characters';
+                msg.style.color = 'red';
+                return;
+            }
+
+            if (newPwd !== confirmNew) {
+                msg.textContent = 'New passwords do not match';
+                msg.style.color = 'red';
+                return;
+            }
+
+            var btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+
+            fetch('includes/change_password.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ current_password: current, new_password: newPwd })
+            })
+            .then(response => response.json())
+            .then(data => {
+                btn.disabled = false;
+                msg.textContent = data.message;
+                msg.style.color = data.success ? 'green' : 'red';
+
+                if (data.success) {
+                    document.getElementById('changePwdForm').reset();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                btn.disabled = false;
+                msg.textContent = 'Error changing password. Please try again.';
+                msg.style.color = 'red';
+            });
+        });
+
+        function logoutStudent() {
+            if (confirm('Are you sure you want to logout?')) {
+                fetch('includes/logout.php', { method: 'POST', keepalive: true });
+                localStorage.removeItem('mtcLoggedIn');
+                localStorage.removeItem('mtcUserType');
+                localStorage.removeItem('mtcUserName');
+                localStorage.removeItem('mtcUserEmail');
+                localStorage.removeItem('mtcIsAdmin');
+                window.location.href = 'form.html';
+            }
+        }
+
+        /* DARK / LIGHT MODE TOGGLE */
+        function toggleTheme() {
+            var body = document.body;
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+            } else {
+                body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+            }
+        }
+
+        /* Load saved theme */
+        (function () {
+            var savedTheme = localStorage.getItem("mtcTheme");
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+            } else if (savedTheme === "light") {
+                document.body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+            }
+        })();
+    </script>
+</body>
+</html>

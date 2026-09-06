@@ -10,6 +10,11 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Courses | Mother Theresa Degree College</title>
 
+<meta name="description" content="Explore courses offered by Mother Theresa Degree College.">
+<meta property="og:title" content="Courses | Mother Theresa Degree College">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
 <link rel="preconnect"
 href="https://fonts.googleapis.com">
 
@@ -19,6 +24,9 @@ crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
 rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
 <style>
@@ -412,6 +420,175 @@ footer{
 }
 
 
+/* ================= THEME TOGGLE ================= */
+
+.theme-toggle{
+
+    position:fixed;
+
+    top:15px;
+
+    right:20px;
+
+    z-index:2000;
+
+    background:rgba(255,255,255,.9);
+
+    border:1px solid #e2e7ed;
+
+    border-radius:50px;
+
+    padding:8px 16px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#0b1f3a;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+    transition:all .3s ease;
+
+}
+
+
+.theme-toggle:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+.theme-toggle i{
+
+    font-size:16px;
+
+}
+
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+
+    background:#0f172a;
+
+    color:#e2e8f0;
+
+}
+
+
+body.dark-mode header{
+
+    background:#1e293b;
+
+    border-bottom-color:#334155;
+
+}
+
+
+body.dark-mode .header-title{
+
+    color:#e2e8f0;
+
+}
+
+
+body.dark-mode .page-heading h2{
+
+    color:#e2e8f0;
+
+}
+
+
+body.dark-mode .page-heading p{
+
+    color:#94a3b8;
+
+}
+
+
+body.dark-mode .department{
+
+    background:#1e293b;
+
+    border-color:#334155;
+
+    box-shadow:0 7px 24px rgba(0,0,0,.2);
+
+}
+
+
+body.dark-mode .course{
+
+    border-bottom-color:#334155;
+
+}
+
+
+body.dark-mode .course:hover{
+
+    background:#0f172a;
+
+}
+
+
+body.dark-mode .course h4{
+
+    color:#e2e8f0;
+
+}
+
+
+body.dark-mode .course p{
+
+    color:#94a3b8;
+
+}
+
+
+body.dark-mode .number{
+
+    color:#d5ad45;
+
+}
+
+
+body.dark-mode .arrow{
+
+    color:#e2e8f0;
+
+}
+
+
+body.dark-mode .theme-toggle{
+
+    background:rgba(255,255,255,.1);
+
+    border-color:rgba(255,255,255,.2);
+
+    color:#e2e8f0;
+
+    box-shadow:none;
+
+}
+
+
+body.dark-mode .theme-toggle:hover{
+
+    background:rgba(255,255,255,.2);
+
+}
+
+
 /* ================= TABLET ================= */
 
 @media(max-width:700px){
@@ -524,6 +701,13 @@ footer{
 
 
 <body>
+
+<!-- DARK / LIGHT MODE TOGGLE -->
+
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+    <i class="fa-solid fa-sun" id="themeIcon"></i>
+    <span id="themeText">Light</span>
+</button>
 
 
 <!-- ==================================================
@@ -886,6 +1070,84 @@ footer{
     © 2026 Mother Theresa Degree College
 
 </footer>
+
+
+<!-- DARK / LIGHT MODE TOGGLE -->
+
+<script>
+
+function toggleTheme(){
+
+    var body=document.body;
+
+    var icon=document.getElementById("themeIcon");
+
+    var text=document.getElementById("themeText");
+
+
+    if(body.classList.contains("dark-mode")){
+
+        body.classList.remove("dark-mode");
+
+        icon.classList.remove("fa-moon");
+
+        icon.classList.add("fa-sun");
+
+        text.textContent="Light";
+
+        localStorage.setItem("mtcTheme","light");
+
+    }else{
+
+        body.classList.add("dark-mode");
+
+        icon.classList.remove("fa-sun");
+
+        icon.classList.add("fa-moon");
+
+        text.textContent="Dark";
+
+        localStorage.setItem("mtcTheme","dark");
+
+    }
+
+}
+
+
+(function(){
+
+    var savedTheme=localStorage.getItem("mtcTheme");
+
+    var icon=document.getElementById("themeIcon");
+
+    var text=document.getElementById("themeText");
+
+
+    if(savedTheme==="dark"){
+
+        document.body.classList.add("dark-mode");
+
+        icon.classList.remove("fa-sun");
+
+        icon.classList.add("fa-moon");
+
+        text.textContent="Dark";
+
+    }else if(savedTheme==="light"){
+
+        document.body.classList.remove("dark-mode");
+
+        icon.classList.remove("fa-moon");
+
+        icon.classList.add("fa-sun");
+
+        text.textContent="Light";
+
+    }
+
+})();
+
+</script>
 
 
 </body>

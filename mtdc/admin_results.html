@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Theresa Degree College - Exam Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #f0f2f5; min-height: 100vh; }
+        .sidebar { position: fixed; left: 0; top: 0; width: 70px; height: 100vh; background: linear-gradient(180deg, #1a5276 0%, #2e86c1 100%); color: white; padding: 20px 0; z-index: 1000; overflow-y: auto; overflow-x: hidden; transition: width 0.3s ease; }
+        .sidebar:hover { width: 260px; }
+        .sidebar-header { text-align: center; padding: 10px 20px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-header .logo { width: 40px; height: 40px; background: white; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; color: #1a5276; }
+        .sidebar-header h3 { font-size: 14px; font-weight: 600; white-space: nowrap; opacity: 0; transition: opacity 0.3s; }
+        .sidebar-header p { font-size: 11px; opacity: 0; }
+        .sidebar:hover .sidebar-header h3 { opacity: 1; }
+        .sidebar:hover .sidebar-header p { opacity: 0.8; }
+        .sidebar-menu { padding: 20px 0; }
+        .sidebar-menu a { display: flex; align-items: center; padding: 12px 25px; color: white; text-decoration: none; font-size: 14px; transition: 0.3s; border-left: 3px solid transparent; white-space: nowrap; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(255,255,255,0.1); border-left-color: #f39c12; }
+        .sidebar-menu a i { margin-right: 12px; min-width: 20px; text-align: center; }
+        .sidebar-menu a span { opacity: 0; transition: opacity 0.3s; }
+        .sidebar:hover .sidebar-menu a span { opacity: 1; }
+        .sidebar-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-footer a { display: flex; align-items: center; padding: 10px; color: white; text-decoration: none; font-size: 13px; background: rgba(255,68,68,0.3); border-radius: 6px; white-space: nowrap; }
+        .sidebar-footer a:hover { background: rgba(255,68,68,0.5); }
+        .sidebar-footer a i { margin-right: 10px; }
+        .main-content { margin-left: 70px; padding: 20px 30px; transition: margin-left 0.3s; }
+        .sidebar:hover ~ .main-content { margin-left: 260px; }
+        .top-bar { background: white; padding: 15px 25px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .top-bar h2 { color: #1a5276; font-size: 22px; }
+        .user-info { display: flex; align-items: center; gap: 12px; }
+        .user-avatar { width: 45px; height: 45px; background: #1a5276; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; }
+        .user-details .name { font-weight: 600; color: #333; font-size: 15px; }
+        .user-details .role { font-size: 12px; color: #888; }
+        .card { background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card-header { padding: 18px 25px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .card-header h3 { color: #1a5276; font-size: 16px; }
+        .card-body { padding: 25px; }
+        .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .form-group label { display: block; font-size: 13px; color: #555; margin-bottom: 6px; font-weight: 500; }
+        .form-group input, .form-group select { width: 100%; padding: 11px 13px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: #1a5276; }
+        .form-actions { margin-top: 20px; text-align: right; }
+        .btn { padding: 10px 22px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; }
+        .btn-primary { background: #1a5276; color: white; }
+        .btn-primary:hover { background: #123b57; }
+        .btn-delete { background: #dc3545; color: white; }
+        .btn-delete:hover { background: #b02a37; }
+        .btn-secondary { background: #888; color: white; }
+        .staff-table { width: 100%; border-collapse: collapse; }
+        .staff-table th { background: #f8f9fa; color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 10px; text-align: left; border-bottom: 2px solid #e9ecef; }
+        .staff-table td { padding: 12px 10px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #333; }
+        .staff-table tr:hover td { background: #f8f9fa; }
+        .empty-state { text-align: center; padding: 30px; color: #888; }
+        .empty-state i { font-size: 32px; margin-bottom: 10px; }
+        .status-badge { display: inline-block; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        #searchResults { margin-top: 8px; }
+        #searchResults select { width: 100%; padding: 11px 13px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+        .msg { margin-top: 12px; font-size: 13px; font-weight: 500; }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">A</div>
+            <h3>Mother Theresa</h3>
+            <p>Admin Panel</p>
+        </div>
+        <div class="sidebar-menu">
+            <a href="admin_dashboard.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+            <a href="admin_dashboard.html"><i class="fa-solid fa-user-check"></i><span>Approve Staff</span></a>
+            <a href="admin_dashboard.html"><i class="fa-solid fa-file-lines"></i><span>Question Papers</span></a>
+            <a href="admin_results.html" class="active"><i class="fa-solid fa-file-spreadsheet"></i><span>Exam Results</span></a>
+            <a href="admin_contact.html"><i class="fa-solid fa-envelope"></i><span>Contact Inbox</span></a>
+            <a href="admin_documents.html"><i class="fa-solid fa-folder-open"></i><span>Documents</span></a>
+            <a href="openwebsite.html"><i class="fa-solid fa-globe"></i><span>View Portal</span></a>
+            <a href="staff_dashboard.html"><i class="fa-solid fa-gauge-high"></i><span>Staff Dashboard</span></a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="top-bar">
+            <div>
+                <h2>Exam Results Management</h2>
+                <p style="font-size:13px; color:#1a5276; font-weight:500;">Upload and manage student marks</p>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="name" id="adminName">Admin</span>
+                    <span class="role">Administrator</span>
+                </div>
+                <div class="user-avatar"><i class="fa-solid fa-user-shield"></i></div>
+            </div>
+        </div>
+
+        <!-- ADD RESULT FORM -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-plus"></i> Add Result</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-grid">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Student</label>
+                        <div style="display:flex; gap:8px;">
+                            <input type="text" id="studentSearch" placeholder="Search by name, ID, email or course...">
+                            <button type="button" class="btn btn-secondary" onclick="searchStudents()" style="white-space:nowrap;"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                        </div>
+                        <div id="searchResults">
+                            <select id="studentSelect" style="display:none;"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" id="subject" placeholder="e.g. Database Management">
+                    </div>
+                    <div class="form-group">
+                        <label>Exam Type</label>
+                        <select id="examType">
+                            <option value="Internal">Internal</option>
+                            <option value="Mid Term">Mid Term</option>
+                            <option value="Semester">Semester</option>
+                            <option value="Assignment">Assignment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Semester</label>
+                        <input type="text" id="semester" placeholder="e.g. 4">
+                    </div>
+                    <div class="form-group">
+                        <label>Course</label>
+                        <select id="course">
+                            <option value="B.Com">B.Com</option>
+                            <option value="B.Sc">B.Sc</option>
+                            <option value="BCA">BCA</option>
+                            <option value="BBA">BBA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Marks Obtained</label>
+                        <input type="number" id="marksObtained" min="0" step="0.01" placeholder="e.g. 78">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Marks</label>
+                        <input type="number" id="maxMarks" min="1" step="0.01" placeholder="e.g. 100">
+                    </div>
+                    <div class="form-group">
+                        <label>Remark (optional)</label>
+                        <input type="text" id="remark" placeholder="e.g. Pass">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="addResult()">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Result
+                    </button>
+                </div>
+                <small id="formMessage" class="msg"></small>
+            </div>
+        </div>
+
+        <!-- RESULTS LIST -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-list"></i> All Results</h3>
+                <button class="btn btn-secondary" onclick="loadResults()" style="background:#1a5276;">
+                    <i class="fa-solid fa-rotate"></i> Refresh
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="resultsContainer">
+                    <div class="empty-state"><i class="fa-solid fa-spinner fa-pulse"></i><p>Loading...</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function checkAuth() {
+            if (localStorage.getItem('mtcLoggedIn') !== 'true' || localStorage.getItem('mtcIsAdmin') !== 'true') {
+                alert('Admin access required. Please login.');
+                window.location.href = 'stafflogin.html';
+            } else {
+                document.getElementById('adminName').textContent = localStorage.getItem('mtcUserName') || 'Admin';
+            }
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout?')) {
+                fetch('includes/logout.php', { method: 'POST', keepalive: true });
+                localStorage.removeItem('mtcLoggedIn');
+                localStorage.removeItem('mtcUserType');
+                localStorage.removeItem('mtcUserName');
+                localStorage.removeItem('mtcUserEmail');
+                localStorage.removeItem('mtcIsAdmin');
+                window.location.href = 'stafflogin.html';
+            }
+        }
+
+        function searchStudents() {
+            var term = document.getElementById('studentSearch').value.trim();
+            var select = document.getElementById('studentSelect');
+            if (term.length < 2) { alert('Type at least 2 characters to search'); return; }
+
+            fetch('includes/get_results.php?action=find_student&term=' + encodeURIComponent(term))
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                select.innerHTML = '';
+                if (data.success && data.students.length > 0) {
+                    select.style.display = 'block';
+                    select.innerHTML = '<option value="">-- Select a student --</option>';
+                    data.students.forEach(function(s) {
+                        var opt = document.createElement('option');
+                        opt.value = s.id;
+                        opt.textContent = s.full_name + ' | ' + (s.student_id || '-') + ' | ' + s.email + (s.course ? ' | ' + s.course : '');
+                        select.appendChild(opt);
+                    });
+                } else {
+                    select.style.display = 'block';
+                    select.innerHTML = '<option value="">No students found</option>';
+                }
+            })
+            .catch(function(err) {
+                console.error('Error:', err);
+                alert('Error searching students');
+            });
+        }
+
+        function addResult() {
+            var studentDbId = document.getElementById('studentSelect').value;
+            var subject = document.getElementById('subject').value.trim();
+            var examType = document.getElementById('examType').value;
+            var semester = document.getElementById('semester').value.trim();
+            var course = document.getElementById('course').value;
+            var marks = parseFloat(document.getElementById('marksObtained').value);
+            var max = parseFloat(document.getElementById('maxMarks').value);
+            var remark = document.getElementById('remark').value.trim();
+            var msg = document.getElementById('formMessage');
+
+            msg.textContent = '';
+
+            if (!studentDbId || !subject || isNaN(marks) || isNaN(max) || max <= 0) {
+                msg.textContent = 'Select a student and fill subject + marks';
+                msg.style.color = 'red';
+                return;
+            }
+
+            if (marks > max) {
+                msg.textContent = 'Marks obtained cannot exceed maximum marks';
+                msg.style.color = 'red';
+                return;
+            }
+
+            fetch('includes/add_result.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    student_db_id: parseInt(studentDbId, 10),
+                    subject: subject,
+                    exam_type: examType,
+                    semester: semester,
+                    course: course,
+                    marks_obtained: marks,
+                    max_marks: max,
+                    remark: remark
+                })
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                msg.textContent = data.message;
+                msg.style.color = data.success ? 'green' : 'red';
+                if (data.success) {
+                    document.getElementById('subject').value = '';
+                    document.getElementById('semester').value = '';
+                    document.getElementById('marksObtained').value = '';
+                    document.getElementById('maxMarks').value = '';
+                    document.getElementById('remark').value = '';
+                    document.getElementById('studentSearch').value = '';
+                    document.getElementById('studentSelect').style.display = 'none';
+                    loadResults();
+                }
+            })
+            .catch(function(err) {
+                console.error('Error:', err);
+                msg.textContent = 'Error adding result. Please try again.';
+                msg.style.color = 'red';
+            });
+        }
+
+        function loadResults() {
+            var container = document.getElementById('resultsContainer');
+            container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-spinner fa-pulse"></i><p>Loading...</p></div>';
+
+            fetch('includes/get_results.php?action=list')
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                if (!data.success || !data.results) {
+                    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><p>' + esc(data.message || 'Failed to load') + '</p></div>';
+                    return;
+                }
+
+                var results = data.results;
+                if (results.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-file-spreadsheet"></i><p>No results added yet.</p></div>';
+                    return;
+                }
+
+                var html = '<table class="staff-table">' +
+                    '<thead><tr>' +
+                    '<th>Student</th><th>ID</th><th>Subject</th><th>Exam</th><th>Sem</th><th>Marks</th><th>%</th><th>Comment</th><th>Action</th>' +
+                    '</tr></thead><tbody>';
+
+                results.forEach(function(r) {
+                    var percent = r.max_marks > 0 ? ((parseFloat(r.marks_obtained) / parseFloat(r.max_marks)) * 100).toFixed(1) : '-';
+                    html += '<tr>' +
+                        '<td><strong>' + esc(r.full_name) + '</strong></td>' +
+                        '<td>' + esc(r.student_id || '-') + '</td>' +
+                        '<td>' + esc(r.subject) + '</td>' +
+                        '<td>' + esc(r.exam_type) + '</td>' +
+                        '<td>' + esc(r.semester || '-') + '</td>' +
+                        '<td>' + esc(r.marks_obtained) + ' / ' + esc(r.max_marks) + '</td>' +
+                        '<td>' + esc(percent) + '%</td>' +
+                        '<td>' + esc(r.remark || '-') + '</td>' +
+                        '<td><button class="btn btn-delete" onclick="deleteResult(' + r.id + ')"><i class="fa-solid fa-trash"></i></button></td>' +
+                        '</tr>';
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            })
+            .catch(function(err) {
+                console.error('Error:', err);
+                container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><p>Failed to load results.</p></div>';
+            });
+        }
+
+        function deleteResult(resultId) {
+            if (!confirm('Delete this result permanently?')) return;
+
+            fetch('includes/get_results.php?action=delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ result_id: resultId })
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                alert(data.message);
+                loadResults();
+            })
+            .catch(function(err) {
+                console.error('Error:', err);
+                alert('Error deleting result');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadResults();
+        });
+    </script>
+</body>
+</html>

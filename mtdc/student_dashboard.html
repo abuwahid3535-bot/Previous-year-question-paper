@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Theresa Degree College - Student Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 100vh;
+            background: linear-gradient(180deg, #062b63 0%, #0b4ea2 100%);
+            color: white;
+            padding: 20px 0;
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar:hover {
+            width: 260px;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 10px 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0b4ea2;
+            transition: 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header .logo {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header h3 {
+            opacity: 1;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-header p {
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #ffca28;
+        }
+
+        .sidebar-menu a i {
+            margin-right: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-menu a span {
+            opacity: 1;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            background: rgba(255,68,68,0.3);
+            border-radius: 6px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .sidebar-footer a:hover {
+            background: rgba(255,68,68,0.5);
+        }
+
+        .sidebar-footer a i {
+            margin-right: 10px;
+        }
+
+        .sidebar-footer a span {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar:hover .sidebar-footer a span {
+            opacity: 1;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 70px;
+            padding: 20px 30px;
+            transition: margin-left 0.3s;
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: 260px;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .top-bar h2 {
+            color: #062b63;
+            font-size: 22px;
+        }
+
+        .top-bar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .top-bar .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: #0b4ea2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .top-bar .user-details span {
+            display: block;
+        }
+
+        .top-bar .user-details .name {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .top-bar .user-details .role {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* STATS CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-card .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .stat-card .icon.blue { background: #e3f2fd; color: #0b4ea2; }
+        .stat-card .icon.green { background: #e8f5e9; color: #28a745; }
+        .stat-card .icon.orange { background: #fff3e0; color: #ff9800; }
+        .stat-card .icon.purple { background: #f3e5f5; color: #9c27b0; }
+
+        .stat-card .info h3 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        .stat-card .info p {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* CONTENT GRID */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 25px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .card-body {
+            padding: 20px 25px;
+        }
+
+        /* COURSE LIST */
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .course-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-icon {
+            width: 50px;
+            height: 50px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 22px;
+            color: #0b4ea2;
+        }
+
+        .course-info {
+            flex: 1;
+        }
+
+        .course-info h4 {
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .course-info p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .course-progress {
+            width: 120px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar .fill {
+            height: 100%;
+            background: #28a745;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            font-size: 11px;
+            color: #888;
+            text-align: right;
+        }
+
+        /* QUICK LINKS */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .quick-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .quick-link:hover {
+            background: #e3f2fd;
+            transform: translateY(-3px);
+        }
+
+        .quick-link i {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #0b4ea2;
+        }
+
+        .quick-link span {
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* NOTIFICATIONS */
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+
+        .notification-icon.info { background: #e3f2fd; color: #0b4ea2; }
+        .notification-icon.success { background: #e8f5e9; color: #28a745; }
+        .notification-icon.warning { background: #fff3e0; color: #ff9800; }
+
+        .notification-text {
+            flex: 1;
+        }
+
+        .notification-text p {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .notification-text small {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .sidebar-header h3,
+            .sidebar-header p,
+            .sidebar-menu a span,
+            .sidebar-footer a span {
+                opacity: 0;
+            }
+            .sidebar:hover .sidebar-header h3,
+            .sidebar:hover .sidebar-header p,
+            .sidebar:hover .sidebar-menu a span,
+            .sidebar:hover .sidebar-footer a span {
+                opacity: 1;
+            }
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+            }
+            .sidebar:hover {
+                width: 260px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 2000;
+            background: rgba(11, 78, 162, 0.1);
+            border: 1px solid rgba(11, 78, 162, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0b4ea2;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(11, 78, 162, 0.2);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .top-bar h2 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar p {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .top-bar .user-details .name {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .top-bar .user-details .role {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .stat-card {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .stat-card .info h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .stat-card .info p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .card {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .card-header {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .card-header h3 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .card-header a {
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode .course-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .course-info h4 {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .course-info p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .notification-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        body.dark-mode .notification-text p {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .notification-text small {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .quick-link {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .quick-link:hover {
+            background: #334155;
+        }
+
+        body.dark-mode #profileName,
+        body.dark-mode #profileEmail {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode #profileCourse,
+        body.dark-mode #profileSem,
+        body.dark-mode #profileRoll {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark/Light Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+        <span id="themeText">Light</span>
+    </button>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">M</div>
+            <h3>Mother Theresa</h3>
+            <p>Degree College</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="student_dashboard.html" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="openwebsite.html">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Question Papers</span>
+            </a>
+            <a href="course.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Courses</span>
+            </a>
+            <a href="profile.html">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+            <a href="contact.html">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="#" onclick="logoutStudent()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div>
+                <h2>Student Dashboard</h2>
+                <p style="font-size:13px; color:#0b4ea2; font-weight:500;">Mother Theresa Degree College</p>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="name" id="studentName">Student</span>
+                    <span class="role">Student</span>
+                </div>
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon blue">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="info">
+                    <h3 id="statCourse">-</h3>
+                    <p>My Course</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon green">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="info">
+                    <h3 id="statPapers">0</h3>
+                    <p>Total Question Papers</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon orange">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <div class="info">
+                    <h3 id="statMyPapers">0</h3>
+                    <p>Papers for My Course</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon purple">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div class="info">
+                    <h3 id="statSem">-</h3>
+                    <p>Current Semester</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT GRID -->
+        <div class="content-grid">
+            <!-- LEFT COLUMN -->
+            <div>
+                <!-- ENROLLED COURSES -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-graduation-cap"></i> Enrolled Course</h3>
+                        <a href="course.html" style="color:#0b4ea2; text-decoration:none; font-size:13px;">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="courseContainer">
+                            <div class="empty-state" id="courseLoading" style="text-align:center; padding:20px; color:#888;">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Loading course details...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LATEST QUESTION PAPERS -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-file-pdf"></i> Latest Question Papers</h3>
+                        <a href="openwebsite.html" style="color:#0b4ea2; text-decoration:none; font-size:13px;">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="papersContainer">
+                            <div class="empty-state" style="text-align:center; padding:20px; color:#888;">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Loading papers...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MY RESULTS -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-file-spreadsheet"></i> My Results</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="resultsContainer">
+                            <div class="empty-state" style="text-align:center; padding:20px; color:#888;">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Loading results...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ACTIVITY -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="activityContainer">
+                            <div class="notification-item">
+                                <div class="notification-icon info"><i class="fa-solid fa-right-to-bracket"></i></div>
+                                <div class="notification-text">
+                                    <p>You logged in to the portal</p>
+                                    <small>Just now</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div>
+                <!-- QUICK LINKS -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-bolt"></i> Quick Links</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-links">
+                            <a href="openwebsite.html" class="quick-link">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>Question Papers</span>
+                            </a>
+                            <a href="course.html" class="quick-link">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>Course Materials</span>
+                            </a>
+                            <a href="profile.html" class="quick-link">
+                                <i class="fa-solid fa-user-pen"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                            <a href="contact.html" class="quick-link">
+                                <i class="fa-solid fa-headset"></i>
+                                <span>Get Help</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFILE CARD -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-id-card"></i> My Profile</h3>
+                        <a href="profile.html" style="color:#0b4ea2; text-decoration:none; font-size:13px;">Edit Profile</a>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <div id="profilePicContainer" style="width:80px; height:80px; background:#0b4ea2; border-radius:50%; margin:0 auto 15px; display:flex; align-items:center; justify-content:center; color:white; font-size:32px; overflow:hidden;">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h4 id="profileName" style="color:#333; margin-bottom:5px;">Student Name</h4>
+                        <p id="profileEmail" style="color:#888; font-size:13px; margin-bottom:15px;">student@mtc.edu</p>
+                        <div style="text-align:left; font-size:13px;">
+                            <p style="margin-bottom:8px;"><strong>Course:</strong> <span id="profileCourse">B.Com</span></p>
+                            <p style="margin-bottom:8px;"><strong>Semester:</strong> <span id="profileSem">4</span></p>
+                            <p style="margin-bottom:8px;"><strong>Roll No:</strong> <span id="profileRoll">MT2024001</span></p>
+                            <p><strong>Status:</strong> <span style="color:#28a745;">Active</span></p>
+                        </div>
+                        <a href="profile.html" style="display:inline-block; margin-top:15px; padding:8px 20px; background:#0b4ea2; color:white; text-decoration:none; border-radius:5px; font-size:12px; font-weight:600;">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                        </a>
+                    </div>
+                </div>
+
+                <!-- UPCOMING EVENTS -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-calendar"></i> Upcoming Events</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-item">
+                            <div class="notification-icon warning"><i class="fa-solid fa-pen-fancy"></i></div>
+                            <div class="notification-text">
+                                <p>Mid-Term Exams</p>
+                                <small>15 Sep 2026</small>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon info"><i class="fa-solid fa-calendar-check"></i></div>
+                            <div class="notification-text">
+                                <p>Holiday - Bathukamma</p>
+                                <small>22 Sep 2026</small>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon success"><i class="fa-solid fa-trophy"></i></div>
+                            <div class="notification-text">
+                                <p>Annual Day Celebration</p>
+                                <small>30 Sep 2026</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loggedIn = localStorage.getItem('mtcLoggedIn');
+            var userType = localStorage.getItem('mtcUserType');
+            var userName = localStorage.getItem('mtcUserName');
+            var userEmail = localStorage.getItem('mtcUserEmail');
+
+            if (!loggedIn || userType !== 'student') {
+                alert('Please login as student first');
+                window.location.href = 'form.html';
+                return;
+            }
+
+            document.getElementById('studentName').textContent = userName || 'Student';
+            document.getElementById('profileName').textContent = userName || 'Student';
+            document.getElementById('profileEmail').textContent = userEmail || 'student@mtc.edu';
+
+            // Load profile picture and real dashboard data from database
+            loadProfileData();
+            loadPapersData();
+            loadMyResults();
+        });
+
+        var courseNames = {
+            bcom: 'B.Com', bsc: 'B.Sc', bca: 'BCA', bba: 'BBA'
+        };
+
+        function courseDisplayName(code) {
+            return courseNames[code] || (code ? code : '');
+        }
+
+        function loadProfileData() {
+            var email = localStorage.getItem('mtcUserEmail');
+            fetch('includes/get_profile.php?email=' + encodeURIComponent(email))
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.profile) {
+                    var profile = data.profile;
+
+                    if (profile.profile_pic) {
+                        document.getElementById('profilePicContainer').innerHTML = '<img src="' + profile.profile_pic + '" alt="Profile" style="width:100%; height:100%; object-fit:cover;">';
+                    }
+                    if (profile.course) {
+                        document.getElementById('profileCourse').textContent = profile.course;
+                        document.getElementById('statCourse').textContent = courseDisplayName(profile.course);
+                    }
+                    if (profile.year_semester) {
+                        document.getElementById('profileSem').textContent = profile.year_semester;
+                        document.getElementById('statSem').textContent = profile.year_semester;
+                    }
+                    if (profile.student_id) {
+                        document.getElementById('profileRoll').textContent = profile.student_id;
+                    }
+
+                    renderCourse(profile);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function renderCourse(profile) {
+            var container = document.getElementById('courseContainer');
+
+            if (!profile.course) {
+                container.innerHTML = '<div class="empty-state" style="text-align:center; padding:20px; color:#888;"><i class="fa-solid fa-graduation-cap"></i><p style="margin-top:10px;">No course assigned yet.</p></div>';
+                return;
+            }
+
+            var courseCode = (profile.course || '').toLowerCase();
+            var icon = 'fa-book';
+            if (courseCode.indexOf('bcom') !== -1) icon = 'fa-calculator';
+            else if (courseCode.indexOf('bca') !== -1) icon = 'fa-laptop-code';
+            else if (courseCode.indexOf('bsc') !== -1) icon = 'fa-database';
+            else if (courseCode.indexOf('bba') !== -1) icon = 'fa-briefcase';
+
+            container.innerHTML =
+                '<div class="course-item">' +
+                    '<div class="course-icon"><i class="fa-solid ' + icon + '"></i></div>' +
+                    '<div class="course-info">' +
+                        '<h4>' + courseDisplayName(profile.course) + '</h4>' +
+                        '<p>' + (profile.department || '') + (profile.year_semester ? ' | Semester ' + profile.year_semester : '') + '</p>' +
+                    '</div>' +
+                    '<div class="course-progress">' +
+                        '<div class="progress-text">' + (profile.year_semester ? 'Semester ' + profile.year_semester : '') + '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function loadMyResults() {
+            var container = document.getElementById('resultsContainer');
+
+            fetch('includes/get_results.php?action=my')
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                if (!data.success || !data.results || data.results.length === 0) {
+                    container.innerHTML = '<div class="empty-state" style="text-align:center; padding:20px; color:#888;">' +
+                        '<i class="fa-solid fa-file-spreadsheet"></i><p style="margin-top:10px;">No results published yet. Check back later.</p></div>';
+                    return;
+                }
+
+                var results = data.results;
+                var totalObtained = 0;
+                var totalMax = 0;
+                var totalsResults = '';
+
+                var html = results.slice(0, 8).map(function(r) {
+                    totalObtained += parseFloat(r.marks_obtained);
+                    totalMax += parseFloat(r.max_marks);
+                    return '<div class="notification-item">' +
+                        '<div class="notification-icon success"><i class="fa-solid fa-check"></i></div>' +
+                        '<div class="notification-text">' +
+                        '<p><strong>' + esc(r.subject) + '</strong> (' + esc(r.exam_type) + ') &mdash; ' +
+                        esc(r.marks_obtained) + ' / ' + esc(r.max_marks) + '</p>' +
+                        '<small>' + (r.remark ? 'Comment: ' + esc(r.remark) : 'Semester ' + esc(r.semester || '-')) + '</small>' +
+                        '</div>' +
+                        '</div>';
+                }).join('');
+
+                if (totalMax > 0) {
+                    var pct = ((totalObtained / totalMax) * 100).toFixed(1);
+                    totalsResults = '<div class="notification-item">' +
+                        '<div class="notification-icon info"><i class="fa-solid fa-percent"></i></div>' +
+                        '<div class="notification-text">' +
+                        '<p><strong>' + totalObtained + ' / ' + totalMax + ' (' + pct + '%)</strong></p>' +
+                        '<small>Overall across ' + results.length + ' graded entries</small>' +
+                        '</div>' +
+                        '</div>';
+                }
+
+                container.innerHTML = totalsResults + html;
+            })
+            .catch(function(err) {
+                console.error('Error loading results:', err);
+                container.innerHTML = '<div class="empty-state" style="text-align:center; padding:20px; color:#888;">' +
+                    '<p>Unable to load results.</p></div>';
+            });
+        }
+
+        function loadPapersData() {
+            var papersContainer = document.getElementById('papersContainer');
+            var activityContainer = document.getElementById('activityContainer');
+
+            fetch('includes/get_papers.php')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) return;
+
+                var papers = data.papers || [];
+                document.getElementById('statPapers').textContent = papers.length;
+
+                var email = localStorage.getItem('mtcUserEmail');
+                fetch('includes/get_profile.php?email=' + encodeURIComponent(email))
+                .then(function(resp) { return resp.json(); })
+                .then(function(pdata) {
+                    var myCourse = '';
+                    if (pdata.success && pdata.profile && pdata.profile.course) {
+                        myCourse = pdata.profile.course.toLowerCase();
+                    }
+                    var mine = papers.filter(function(p) { return p.course === myCourse; });
+                    document.getElementById('statMyPapers').textContent = mine.length;
+                })
+                .catch(function() {});
+
+                if (papers.length === 0) {
+                    papersContainer.innerHTML = '<div class="empty-state" style="text-align:center; padding:20px; color:#888;"><i class="fa-solid fa-folder-open"></i><p style="margin-top:10px;">No question papers uploaded yet.</p></div>';
+                    return;
+                }
+
+                var html = '';
+                papers.slice(0, 5).forEach(function(paper) {
+                    html += '<div class="notification-item">' +
+                        '<div class="notification-icon info"><i class="fa-solid fa-file-pdf"></i></div>' +
+                        '<div class="notification-text">' +
+                        '<p>' + esc(paper.title) + '</p>' +
+                        '<small>' + esc(courseDisplayName(paper.course)) + ' | Semester ' + esc(paper.semester) + ' | ' + esc(paper.year) + '</small>' +
+                        '</div>' +
+                        '<a href="openwebsite.html" style="color:#0b4ea2; font-size:12px; text-decoration:none;">View</a>' +
+                        '</div>';
+                });
+                papersContainer.innerHTML = html;
+
+                // Recent activity from latest papers
+                var activity = '<div class="notification-item">' +
+                    '<div class="notification-icon success"><i class="fa-solid fa-file-circle-plus"></i></div>' +
+                    '<div class="notification-text"><p>New question paper added: <strong>' + papers[0].title + '</strong></p><small>' + new Date(papers[0].created_at).toLocaleDateString('en-IN') + '</small></div>' +
+                    '</div>';
+                activityContainer.innerHTML = activity + '<div class="notification-item">' +
+                    '<div class="notification-icon info"><i class="fa-solid fa-right-to-bracket"></i></div>' +
+                    '<div class="notification-text"><p>You logged in to the portal</p><small>Just now</small></div>' +
+                    '</div>';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function logoutStudent() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('mtcLoggedIn');
+                localStorage.removeItem('mtcUserType');
+                localStorage.removeItem('mtcUserName');
+                localStorage.removeItem('mtcUserEmail');
+                fetch('includes/logout.php', { method: 'POST', keepalive: true });
+                alert('Logged out successfully!');
+                window.location.href = 'form.html';
+            }
+        }
+
+        /* DARK / LIGHT MODE TOGGLE */
+        function toggleTheme() {
+            var body = document.body;
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+                localStorage.setItem("mtcTheme", "light");
+            } else {
+                body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+                localStorage.setItem("mtcTheme", "dark");
+            }
+        }
+
+        /* Load saved theme */
+        (function () {
+            var savedTheme = localStorage.getItem("mtcTheme");
+            var icon = document.getElementById("themeIcon");
+            var text = document.getElementById("themeText");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark-mode");
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+                text.textContent = "Dark";
+            } else if (savedTheme === "light") {
+                document.body.classList.remove("dark-mode");
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+                text.textContent = "Light";
+            }
+        })();
+    </script>
+</body>
+</html>

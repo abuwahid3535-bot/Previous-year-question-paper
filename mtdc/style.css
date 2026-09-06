@@ -329,6 +329,98 @@ button {
 }
 
 
+/* Dark/Light Mode Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.theme-toggle i {
+    font-size: 16px;
+}
+
+/* Light Mode */
+body.light-mode {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #ddd6fe 100%);
+    color: #1e293b;
+}
+
+body.light-mode .login-box {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .login-box label {
+    color: #1e293b;
+}
+
+body.light-mode .login-box .input-box input {
+    background: #f1f5f9;
+    border: 1px solid #94a3b8;
+    color: #1e293b;
+}
+
+body.light-mode .login-box .input-box input::placeholder {
+    color: #64748b;
+}
+
+body.light-mode .login-box .input-box input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+body.light-mode .login-box .input-box i {
+    color: #475569;
+}
+
+body.light-mode .login-box small {
+    color: #475569;
+}
+
+body.light-mode .login-box .bottom-section {
+    border-top: 1px solid #e2e8f0;
+}
+
+body.light-mode .links a {
+    color: #1e293b;
+}
+
+body.light-mode .links a:hover {
+    color: #2563eb;
+}
+
+body.light-mode .theme-toggle {
+    background: rgba(30, 41, 59, 0.1);
+    border: 1px solid rgba(30, 41, 59, 0.2);
+    color: #1e293b;
+}
+
+body.light-mode .theme-toggle:hover {
+    background: rgba(30, 41, 59, 0.2);
+}
+
+
 /* Mobile */
 
 @media (max-width: 650px) {

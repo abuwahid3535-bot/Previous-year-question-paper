@@ -1,0 +1,16 @@
+# Refact buddy workspace (local AI tooling)
+.refact/
+
+# Uploaded files
+uploads/
+
+# Secrets - never commit real credentials
+includes/twilio_config.php
+
+# OS / editor junk
+Thumbs.db
+.DS_Store
+*.log
+
+# Local server copies should never be committed
+htdocs/
